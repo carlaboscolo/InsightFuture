@@ -10,5 +10,6 @@
     <string name="bornPlace">Luogo di nascita</string>
     <string name="loading">Caricamento...</string>
     <string name="question">Domanda</string>
+    <string name="search">Cerca</string>
 
 </resources>

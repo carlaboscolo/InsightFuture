@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
@@ -38,6 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener{
             getFirstLetter(question.text.toString())
+        }
+
+
+        for(key in table.keys){
+            Log.d("Table", table[key].toString())
         }
 
         //Log.d("Table", table["kqwyx"].toString())

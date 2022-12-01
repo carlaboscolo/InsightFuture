@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bornPlace : EditText
     private lateinit var searchBtn : Button
 
+    private val keyLetters = arrayOf<String>("kqwyx", "hvu", "ers", "mt", "lo", "ag", "ijn", "cf", "dz", "pb")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)

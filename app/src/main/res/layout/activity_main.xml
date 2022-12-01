@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/question"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="250px"
         android:background="@color/white"
         android:hint="Domanda"
         android:textColor="@color/black"
@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="150px"
         android:background="@color/white"
         android:hint="Nome"
         android:paddingLeft="40px"
@@ -42,7 +42,7 @@
     <EditText
         android:id="@+id/surname"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="150px"
         android:background="@color/white"
         android:hint="Cognome"
         android:paddingLeft="40px"
@@ -58,7 +58,7 @@
     <EditText
         android:id="@+id/bornPlace"
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="150px"
         android:layout_marginStart="4dp"
         android:background="@color/white"
         android:hint="Luogo di nascita"

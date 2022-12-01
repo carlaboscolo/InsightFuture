@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         surname = binding.surname
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
-        
+
         searchBtn.setOnClickListener{
             getFirstLetter(question.text.toString())
         }
@@ -39,9 +39,10 @@ class MainActivity : AppCompatActivity() {
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
-        Log.d("array", arr.toString())
+       // Log.d("array", arr[2])
         return arr
     }
+
 
 
 }

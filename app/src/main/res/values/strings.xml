@@ -7,7 +7,9 @@
     <string name="confirm_password">Conferma Password</string>
     <string name="login">Login</string>
     <string name="register">Registrati</string>
-    <string name="BornPlace">Luogo di nascita</string>
-    <string name="Loading">Caricamento...</string>
+    <string name="bornPlace">Luogo di nascita</string>
+    <string name="loading">Caricamento...</string>
+    <string name="question">Domanda</string>
+
     
 </resources>

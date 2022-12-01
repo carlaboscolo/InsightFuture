@@ -23,4 +23,52 @@
         app:layout_constraintVertical_bias="0.057" />
 
 
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/white"
+        android:hint="Nome"
+        android:paddingLeft="40px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/white"
+        android:hint="Cognome"
+        android:paddingLeft="40px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <EditText
+        android:id="@+id/bornPlace"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginStart="4dp"
+        android:background="@color/white"
+        android:hint="Luogo di nascita"
+        android:paddingLeft="40px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surname"
+        app:layout_constraintVertical_bias="0.045" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

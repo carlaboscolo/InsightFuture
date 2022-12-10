@@ -17,10 +17,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchBtn : Button
 
   //  private val keyLetters = arrayOf<String>("kqwyx", "hvu", "ers", "mt", "lo", "ag", "ijn", "cf", "dz", "pb")
-  //  private val keyNumbers = arrayOf<Int>(0 , 1 , 2 ,3 ,4 ,5 , 6 ,7 ,8 ,9 )
+    private val keyNumbers = arrayOf<Int>(0 , 1 , 2 ,3 ,4 ,5 , 6 ,7 ,8 ,9 )
 
-    private val table: HashMap<String,Int> = hashMapOf("kqwyx" to 0, "hvu" to 1, "ers" to 2) // table for letters and numbers
+  //  private val table: HashMap<Int,String> = hashMapOf(0 to "kqwyx", 1 to "hvu", 2 to "ers") // table for letters and numbers
 
+
+    private val keyLetters = arrayOf<String>("k", "q", "w", "y", "x", "h", "v", "u", "e", "r", "s", "m", "t", "l", "o", "a", "g", "i", "j", "n", "c", "f", "d", "z", "p", "b")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        for(key in table.keys){
+       /* for(key in table.keys){
             Log.d("Table", table[key].toString())
-        }
+        } */
 
         //Log.d("Table", table["kqwyx"].toString())
     }
@@ -51,7 +53,15 @@ class MainActivity : AppCompatActivity() {
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
-       // Log.d("array", arr[2])
+
+        Log.d("array", arr[1])
+
+        val str = arr[1].toString()
+
+        //first letter
+        val firstLetter = str.substring(0, 1)
+        Log.d("array", firstLetter)
+
         return arr
     }
 

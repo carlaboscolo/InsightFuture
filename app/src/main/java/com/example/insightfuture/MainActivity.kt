@@ -54,13 +54,24 @@ class MainActivity : AppCompatActivity() {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
 
-        Log.d("array", arr[1])
+       // Log.d("array", arr[1])
 
-        val str = arr[1].toString()
+        for(array in arr){
+            Log.d("array", array)
+        }
 
         //first letter
-        val firstLetter = str.substring(0, 1)
-        Log.d("array", firstLetter)
+        //val str = arr[1].toString()
+        // val firstLetter = str.substring(0, 1)
+        //Log.d("array", firstLetter)
+
+
+        for(array in arr){
+            val strArr = array.toString()
+            val arrFirstLetter = strArr.substring(0,1)
+            Log.d("first", arrFirstLetter)
+        }
+
 
         return arr
     }

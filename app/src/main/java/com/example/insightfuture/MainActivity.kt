@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
 
-       // Log.d("array", arr[1])
+        // Log.d("array", arr[1])
 
-        for(array in arr){
+        for (array in arr) {
             Log.d("array", array)
         }
 
@@ -65,16 +65,35 @@ class MainActivity : AppCompatActivity() {
         // val firstLetter = str.substring(0, 1)
         //Log.d("array", firstLetter)
 
+        val arrayMath = arrayOf<Int>()
+        //var arrFirstLetter = arrayOf<String>()
 
-        for(array in arr){
+        for (array in arr) {
             val strArr = array.toString()
-            val arrFirstLetter = strArr.substring(0,1)
+            val arrFirstLetter = strArr.substring(0, 1)
             Log.d("first", arrFirstLetter)
+
+
+            // if(arrFirstLetter === )
+
+            Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
+
+            /*   if (arrFirstLetter == keyLetters.copyOfRange(0, 5).contentToString()) {
+                     Log.d("first", "entrato qui")
+                 }
+             */
+
+
         }
 
 
-        return arr
-    }
+
+
+
+
+
+            return arr
+        }
 
 
 

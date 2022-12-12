@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
+import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +48,18 @@ class MainActivity : AppCompatActivity() {
         } */
 
         //Log.d("Table", table["kqwyx"].toString())
+    }
+
+
+    private fun getJsonDataFromAsset(fileName: String): String? {
+        val jsonString: String
+        try {
+            jsonString = application.assets.open(fileName).bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+            return null
+        }
+        return jsonString
     }
 
 

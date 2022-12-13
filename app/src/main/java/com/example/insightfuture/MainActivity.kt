@@ -22,7 +22,40 @@ class MainActivity : AppCompatActivity() {
   //  private val table: HashMap<Int,String> = hashMapOf(0 to "kqwyx", 1 to "hvu", 2 to "ers") // table for letters and numbers
 
 
-    private val keyLetters = arrayOf<String>("k", "q", "w", "y", "x", "h", "v", "u", "e", "r", "s", "m", "t", "l", "o", "a", "g", "i", "j", "n", "c", "f", "d", "z", "p", "b")
+    // private val keyLetters = arrayOf<String>("k", "q", "w", "y", "x", "h", "v", "u", "e", "r", "s", "m", "t", "l", "o", "a", "g", "i", "j", "n", "c", "f", "d", "z", "p", "b")
+
+
+    private val KeyLetters = mapOf(
+
+        "k" to 0,
+        "q" to 0,
+        "w" to 0,
+        "y" to 0,
+        "x" to 0,
+        "h" to 1,
+        "v" to 1,
+        "u" to 1,
+        "e" to 2,
+        "r" to 2,
+        "s" to 2,
+        "m" to 3,
+        "t" to 3,
+        "i" to 4,
+        "o" to 4,
+        "a" to 5,
+        "g" to 5,
+        "l" to 6,
+        "j" to 6,
+        "n" to 6,
+        "c" to 7,
+        "f" to 7,
+        "d" to 8,
+        "z" to 8,
+        "p" to 9,
+        "b" to 9,
+
+    )
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,28 +106,15 @@ class MainActivity : AppCompatActivity() {
             val arrFirstLetter = strArr.substring(0, 1)
             Log.d("first", arrFirstLetter)
 
-
             // if(arrFirstLetter === )
 
-            Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
+           // Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
 
             /*   if (arrFirstLetter == keyLetters.copyOfRange(0, 5).contentToString()) {
                      Log.d("first", "entrato qui")
                  }
              */
-
-
         }
-
-
-
-
-
-
-
             return arr
         }
-
-
-
 }

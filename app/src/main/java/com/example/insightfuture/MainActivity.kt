@@ -70,7 +70,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             Log.d("first", "somma : " + sum )
+            getRightNumber(sum)
         }
+
+
 
     }
 
@@ -107,6 +110,25 @@ class MainActivity : AppCompatActivity() {
 
             return 0
         }
+
+
+
+        private fun getRightNumber(sum : Int) : Int {
+          var somma = " "
+
+
+           if(sum > 99) {
+             somma =  sum.toString().substring(2,3)
+           } else if(sum > 10){
+             somma =   sum.toString().substring(1,2)
+           }else{
+               somma = sum.toString()
+           }
+
+            Log.d("Sum", somma.toString())
+            return somma.toInt()
+        }
+
 
 
 }

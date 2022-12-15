@@ -81,8 +81,7 @@ class MainActivity : AppCompatActivity() {
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
-
-        // Log.d("array", arr[1])
+        
 
         for (array in arr) {
             Log.d("array", array)
@@ -115,7 +114,6 @@ class MainActivity : AppCompatActivity() {
 
         private fun getRightNumber(sum : Int) : Int {
           var somma = " "
-
 
            if(sum > 99) {
              somma =  sum.toString().substring(2,3)

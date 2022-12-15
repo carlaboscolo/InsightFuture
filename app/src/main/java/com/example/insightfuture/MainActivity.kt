@@ -63,14 +63,40 @@ class MainActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener{
 
-          val arrFirstLetter =  getFirstLetter(question.text.toString())
+            val arrFirstLetter =  getFirstLetter(question.text.toString())
+            val nameFirstLetter = getFirstLetter(name.text.toString())
+            val surnameFirstLetter = getFirstLetter(surname.text.toString())
+            val bornPlaceFirstLetter = getFirstLetter(bornPlace.text.toString())
+
+            var first: Int? = null
+            var last = 0
+
             var sum  = 0
             for(i in arrFirstLetter.indices){
+                if(first == null){
+                    first = getNumFromArr(arrFirstLetter[i])
+                    Log.d("first", "first" + first)
+                }
+
+                last = getNumFromArr(arrFirstLetter[i])
+                Log.d("first", "last" + last)
+
                 sum = sum + getNumFromArr(arrFirstLetter[i])
+
             }
 
+            sum = getRightNumber(sum)
             Log.d("first", "somma : " + sum )
-            getRightNumber(sum)
+
+
+            var sum2 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + getNumFromArr(bornPlaceFirstLetter[0]) + last
+            sum2 = getRightNumber(sum2)
+            Log.d("first", "somma 2 : " + sum2 )
+
+            var sum3 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + first!! + last
+            sum3 = getRightNumber(sum3)
+            Log.d("first", "somma 3 : " + sum3 )
+
         }
 
 
@@ -81,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
-        
+
 
         for (array in arr) {
             Log.d("array", array)

@@ -16,15 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bornPlace : EditText
     private lateinit var searchBtn : Button
 
-  //  private val keyLetters = arrayOf<String>("kqwyx", "hvu", "ers", "mt", "lo", "ag", "ijn", "cf", "dz", "pb")
-    private val keyNumbers = arrayOf<Int>(0 , 1 , 2 ,3 ,4 ,5 , 6 ,7 ,8 ,9 )
-
-  //  private val table: HashMap<Int,String> = hashMapOf(0 to "kqwyx", 1 to "hvu", 2 to "ers") // table for letters and numbers
-
-
-    // private val keyLetters = arrayOf<String>("k", "q", "w", "y", "x", "h", "v", "u", "e", "r", "s", "m", "t", "l", "o", "a", "g", "i", "j", "n", "c", "f", "d", "z", "p", "b")
-
-
     private val KeyLetters = mapOf(
         "k" to 0,
         "q" to 0,
@@ -68,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
 
-        //Log.d("value", KeyLetters["k"].toString())
-
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener{
@@ -78,18 +67,10 @@ class MainActivity : AppCompatActivity() {
             for(i in arrFirstLetter.indices){
                 var sum  = 0
                 sum = sum + getNumFromArr(arrFirstLetter[i])
-              //  Log.d("first", i.toString())
             }
 
         }
 
-
-
-       /* for(key in table.keys){
-            Log.d("Table", table[key].toString())
-        } */
-
-        //Log.d("Table", table["kqwyx"].toString())
     }
 
 
@@ -103,29 +84,12 @@ class MainActivity : AppCompatActivity() {
             Log.d("array", array)
         }
 
-        //first letter
-        //val str = arr[1].toString()
-        // val firstLetter = str.substring(0, 1)
-        //Log.d("array", firstLetter)
-
-
         var arrFirstLetter = arrayOf<String>()
 
         for (i in arr.indices) {
-           // val strArr = i.toString()
             arrFirstLetter += arrayOf(arr[i].toString().substring(0, 1))
         }
 
-
-
-            // if(arrFirstLetter === )
-
-           // Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
-
-            /*   if (arrFirstLetter == keyLetters.copyOfRange(0, 5).contentToString()) {
-                     Log.d("first", "entrato qui")
-                 }
-             */
             return arrFirstLetter
         }
 
@@ -139,14 +103,8 @@ class MainActivity : AppCompatActivity() {
 
                }
 
-
-
-
             return 0
         }
-
-
-
 
 
 }

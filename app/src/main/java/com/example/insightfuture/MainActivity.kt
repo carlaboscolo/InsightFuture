@@ -64,11 +64,12 @@ class MainActivity : AppCompatActivity() {
         searchBtn.setOnClickListener{
 
           val arrFirstLetter =  getFirstLetter(question.text.toString())
+            var sum  = 0
             for(i in arrFirstLetter.indices){
-                var sum  = 0
                 sum = sum + getNumFromArr(arrFirstLetter[i])
             }
 
+            Log.d("first", "somma : " + sum )
         }
 
     }
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
             KeyLetters.forEach { (key, value) ->
                 if(firstLetter == key){
                     Log.d("first", "sono entrato qui $key")
+                    return value
                 }
 
                }

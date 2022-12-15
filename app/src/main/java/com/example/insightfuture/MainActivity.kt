@@ -97,9 +97,11 @@ class MainActivity : AppCompatActivity() {
             sum3 = getRightNumber(sum3)
             Log.d("first", "somma 3 : " + sum3 )
 
+            var triplette1 = sum.toString() + sum2.toString() + sum3.toString()
+            var triplette2 = sum2.toString() + sum3.toString() +  sum.toString()
+            var triplette3 = sum3.toString() + sum.toString() + sum2.toString()
+            Log.d("triple" , triplette1 + " " + triplette2 + " " + triplette3)
         }
-
-
 
     }
 

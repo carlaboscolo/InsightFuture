@@ -6,6 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import java.io.IOException
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,28 +43,37 @@ class MainActivity : AppCompatActivity() {
         searchBtn = binding.searchBtn
 
         searchBtn.setOnClickListener{
-            getFirstLetter(question.text.toString())
+            //getFirstLetter(question.text.toString())
+            getSibillaCode(applicationContext, "../assets/Sibillia.json")?.let { it1 ->
+                Log.d("sibillia",
+                    it1
+                )
+            }
+
         }
 
 
-       /* for(key in table.keys){
-            Log.d("Table", table[key].toString())
-        } */
 
-        //Log.d("Table", table["kqwyx"].toString())
     }
 
 
-    private fun getJsonDataFromAsset(fileName: String): String? {
+    fun getSibillaCode(context: Context, fileName: String): String? {
         val jsonString: String
         try {
-            jsonString = application.assets.open(fileName).bufferedReader().use { it.readText() }
+            jsonString = context.assets.open(fileName).bufferedReader().use { it.readText() }
         } catch (ioException: IOException) {
             ioException.printStackTrace()
             return null
         }
         return jsonString
     }
+
+
+    data class Sibillia(var pos1 : String, var pos2 : String, var pos3 : String, var pos_tripla : String, var stringa1 : String, var stringa2 : String){
+
+    }
+
+
 
 
     private fun getFirstLetter(stringa : String): Array<String> {

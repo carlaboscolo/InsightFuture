@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private val KeyLetters = mapOf(
-
         "k" to 0,
         "q" to 0,
         "w" to 0,
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         "z" to 8,
         "p" to 9,
         "b" to 9,
-
     )
 
 
@@ -70,9 +68,21 @@ class MainActivity : AppCompatActivity() {
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
 
+        //Log.d("value", KeyLetters["k"].toString())
+
+       // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
+
         searchBtn.setOnClickListener{
-            getFirstLetter(question.text.toString())
+
+          val arrFirstLetter =  getFirstLetter(question.text.toString())
+            for(i in arrFirstLetter.indices){
+                var sum  = 0
+                sum = sum + getNumFromArr(arrFirstLetter[i])
+              //  Log.d("first", i.toString())
+            }
+
         }
+
 
 
        /* for(key in table.keys){
@@ -98,13 +108,15 @@ class MainActivity : AppCompatActivity() {
         // val firstLetter = str.substring(0, 1)
         //Log.d("array", firstLetter)
 
-        val arrayMath = arrayOf<Int>()
-        //var arrFirstLetter = arrayOf<String>()
 
-        for (array in arr) {
-            val strArr = array.toString()
-            val arrFirstLetter = strArr.substring(0, 1)
-            Log.d("first", arrFirstLetter)
+        var arrFirstLetter = arrayOf<String>()
+
+        for (i in arr.indices) {
+           // val strArr = i.toString()
+            arrFirstLetter += arrayOf(arr[i].toString().substring(0, 1))
+        }
+
+
 
             // if(arrFirstLetter === )
 
@@ -114,7 +126,28 @@ class MainActivity : AppCompatActivity() {
                      Log.d("first", "entrato qui")
                  }
              */
+            return arrFirstLetter
         }
-            return arr
+
+
+        private fun getNumFromArr(firstLetter :  String)  :  Int {
+
+            KeyLetters.forEach { (key, value) ->
+                if(firstLetter == key){
+                    Log.d("first", "sono entrato qui $key")
+                }
+
+               }
+
+
+
+
+            return 0
         }
+
+
+
+
+
 }
+

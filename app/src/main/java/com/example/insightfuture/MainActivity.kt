@@ -9,6 +9,8 @@ import java.io.IOException
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,11 +46,41 @@ class MainActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener{
             //getFirstLetter(question.text.toString())
-            getSibillaCode(applicationContext, "../assets/Sibillia.json")?.let { it1 ->
+
+
+            //prende file da sibililia.json in cartella res/raw scritto in minuscolo
+            val jsonData = applicationContext.resources.openRawResource(
+            applicationContext.resources.getIdentifier(
+                "sibillia",
+                "raw",
+                applicationContext.packageName
+            )
+            ).bufferedReader().use { it.readText() }
+
+
+            val outputJsonString = JSONArray(jsonData)
+            //Log.d("sib", outputJsonString.toString()) //stampa tutti i dati
+
+            //cicla array sibillia
+            for (i in 0 until outputJsonString.length()){
+                val pos1 = outputJsonString.getJSONObject(i).getString("pos1")
+                val pos2 = outputJsonString.getJSONObject(i).getString("pos2")
+                val pos3 = outputJsonString.getJSONObject(i).getString("pos3")
+                val pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla")
+                val stringa1 = outputJsonString.getJSONObject(i).getString("stringa1")
+                val stringa2 = outputJsonString.getJSONObject(i).getString("stringa2")
+
+                Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+            }
+
+          //
+
+
+           /* getSibillaCode(applicationContext, "../assets/Sibillia.json")?.let { it1 ->
                 Log.d("sibillia",
                     it1
                 )
-            }
+            } */
 
         }
 
@@ -56,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+/*
     fun getSibillaCode(context: Context, fileName: String): String? {
         val jsonString: String
         try {
@@ -72,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     data class Sibillia(var pos1 : String, var pos2 : String, var pos3 : String, var pos_tripla : String, var stringa1 : String, var stringa2 : String){
 
     }
-
+*/
 
 
 

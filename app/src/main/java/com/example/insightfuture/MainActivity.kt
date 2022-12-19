@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var surname : EditText
     private lateinit var bornPlace : EditText
     private lateinit var searchBtn : Button
+    private var pos1 by Delegates.notNull<Int>()
 
-  //  private val keyLetters = arrayOf<String>("kqwyx", "hvu", "ers", "mt", "lo", "ag", "ijn", "cf", "dz", "pb")
+    //  private val keyLetters = arrayOf<String>("kqwyx", "hvu", "ers", "mt", "lo", "ag", "ijn", "cf", "dz", "pb")
     private val keyNumbers = arrayOf<Int>(0 , 1 , 2 ,3 ,4 ,5 , 6 ,7 ,8 ,9 )
 
   //  private val table: HashMap<Int,String> = hashMapOf(0 to "kqwyx", 1 to "hvu", 2 to "ers") // table for letters and numbers
@@ -43,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         surname = binding.surname
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
-
         searchBtn.setOnClickListener{
             //getFirstLetter(question.text.toString())
 
@@ -61,17 +62,31 @@ class MainActivity : AppCompatActivity() {
             val outputJsonString = JSONArray(jsonData)
             //Log.d("sib", outputJsonString.toString()) //stampa tutti i dati
 
-            //cicla array sibillia
-            for (i in 0 until outputJsonString.length()){
-                val pos1 = outputJsonString.getJSONObject(i).getString("pos1")
-                val pos2 = outputJsonString.getJSONObject(i).getString("pos2")
-                val pos3 = outputJsonString.getJSONObject(i).getString("pos3")
-                val pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla")
-                val stringa1 = outputJsonString.getJSONObject(i).getString("stringa1")
-                val stringa2 = outputJsonString.getJSONObject(i).getString("stringa2")
 
-                Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+
+                //cicla array sibillia
+                for (i in 0 until outputJsonString.length()) {
+                     pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
+                    val pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
+                    val pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
+                    val pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
+                    val stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
+                    val stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
+
+
+
+                    if(pos1 == 0 ){
+
+                        Log.d("sibComp", "pos1: $pos1 == 0 ") //prova comparazione pos1
+
+                    }
+                    Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+                }
             }
+
+
+
+
 
           //
 
@@ -134,7 +149,7 @@ class MainActivity : AppCompatActivity() {
 
             // if(arrFirstLetter === )
 
-            Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
+          //  Log.d("first", keyLetters.copyOfRange(0, 5).contentToString())
 
             /*   if (arrFirstLetter == keyLetters.copyOfRange(0, 5).contentToString()) {
                      Log.d("first", "entrato qui")

@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         searchBtn = binding.searchBtn
 
 
+
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener{
@@ -80,8 +81,8 @@ class MainActivity : AppCompatActivity() {
 
             var first: Int? = null
             var last = 0
-
             var sum  = 0
+
             for(i in arrFirstLetter.indices){
                 if(first == null){
                     first = getNumFromArr(arrFirstLetter[i])
@@ -99,11 +100,11 @@ class MainActivity : AppCompatActivity() {
             Log.d("first", "somma : " + sum )
 
 
-            var sum2 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + getNumFromArr(bornPlaceFirstLetter[0]) + last
+           var sum2 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + getNumFromArr(bornPlaceFirstLetter[0]) + last
             sum2 = getRightNumber(sum2)
             Log.d("first", "somma 2 : " + sum2 )
 
-            var sum3 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + first!! + last
+           var sum3 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + first!! + last
             sum3 = getRightNumber(sum3)
             Log.d("first", "somma 3 : " + sum3 )
 
@@ -111,10 +112,7 @@ class MainActivity : AppCompatActivity() {
             var triplette2 = sum2.toString() + sum3.toString() +  sum.toString()
             var triplette3 = sum3.toString() + sum.toString() + sum2.toString()
             Log.d("triple" , triplette1 + " " + triplette2 + " " + triplette3)
-        }
 
-
-        searchBtn.setOnClickListener{
             //getFirstLetter(question.text.toString())
 
 
@@ -144,10 +142,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                    if(pos1 == 0 ){
-
-                        Log.d("sibComp", "pos1: $pos1 == 0 ") //prova comparazione pos1
-
+                    if(pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1"){
+                        Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
+                        Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
                     }
                     Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }

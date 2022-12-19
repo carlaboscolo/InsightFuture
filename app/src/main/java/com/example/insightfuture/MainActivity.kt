@@ -5,6 +5,14 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
+import java.io.IOException
+import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONObject
+import kotlin.properties.Delegates
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var surname : EditText
     private lateinit var bornPlace : EditText
     private lateinit var searchBtn : Button
+    private var pos1 by Delegates.notNull<Int>()
+
 
     private val KeyLetters = mapOf(
         "k" to 0,
@@ -46,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     )
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
@@ -58,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         surname = binding.surname
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
+
 
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
@@ -103,7 +113,67 @@ class MainActivity : AppCompatActivity() {
             Log.d("triple" , triplette1 + " " + triplette2 + " " + triplette3)
         }
 
+
+        searchBtn.setOnClickListener{
+            //getFirstLetter(question.text.toString())
+
+
+            //prende file da sibililia.json in cartella res/raw scritto in minuscolo
+            val jsonData = applicationContext.resources.openRawResource(
+            applicationContext.resources.getIdentifier(
+                "sibillia",
+                "raw",
+                applicationContext.packageName
+            )
+            ).bufferedReader().use { it.readText() }
+
+
+            val outputJsonString = JSONArray(jsonData)
+            //Log.d("sib", outputJsonString.toString()) //stampa tutti i dati
+
+
+
+                //cicla array sibillia
+                for (i in 0 until outputJsonString.length()) {
+                     pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
+                    val pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
+                    val pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
+                    val pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
+                    val stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
+                    val stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
+
+
+
+                    if(pos1 == 0 ){
+
+                        Log.d("sibComp", "pos1: $pos1 == 0 ") //prova comparazione pos1
+
+                    }
+                    Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+                }
+            }
+
+
+
+
+
+          //
+
+
+           /* getSibillaCode(applicationContext, "../assets/Sibillia.json")?.let { it1 ->
+                Log.d("sibillia",
+                    it1
+                )
+            } */
+
+        }
+
+
+
+
     }
+
+
 
 
     private fun getFirstLetter(stringa : String): Array<String> {
@@ -127,14 +197,13 @@ class MainActivity : AppCompatActivity() {
 
         private fun getNumFromArr(firstLetter :  String)  :  Int {
 
+
             KeyLetters.forEach { (key, value) ->
-                if(firstLetter == key){
-                    Log.d("first", "sono entrato qui $key")
-                    return value
-                }
-
+                    if(firstLetter == key){
+                        Log.d("first", "sono entrato qui $key")
+                        return value
+                    }
                }
-
             return 0
         }
 
@@ -158,4 +227,7 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+
 

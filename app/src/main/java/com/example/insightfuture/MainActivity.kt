@@ -152,26 +152,8 @@ class MainActivity : AppCompatActivity() {
                     Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
             }
-
-
-
-
-
-          //
-
-
-           /* getSibillaCode(applicationContext, "../assets/Sibillia.json")?.let { it1 ->
-                Log.d("sibillia",
-                    it1
-                )
-            } */
-
         }
 
-
-
-
-    }
 
 
 

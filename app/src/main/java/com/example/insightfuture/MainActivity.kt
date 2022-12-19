@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                      stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
 
 
-
+                    Log.d("sibComp", " Dati: 1: $sum, 2: $sum2, 3: $sum3" )
                     if(pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1"){
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1

@@ -24,7 +24,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bornPlace : EditText
     private lateinit var searchBtn : Button
     private var pos1 by Delegates.notNull<Int>()
-
+    private var pos2 by Delegates.notNull<Int>()
+    private var pos3 by Delegates.notNull<Int>()
+    private var pos_tripla by Delegates.notNull<String>()
+    private var stringa1 by Delegates.notNull<String>()
+    private var stringa2 by Delegates.notNull<String>()
 
     private val KeyLetters = mapOf(
         "k" to 0,
@@ -136,11 +140,11 @@ class MainActivity : AppCompatActivity() {
                 //cicla array sibillia
                 for (i in 0 until outputJsonString.length()) {
                      pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
-                    val pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
-                    val pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
-                    val pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
-                    val stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
-                    val stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
+                     pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
+                     pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
+                     pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
+                     stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
+                     stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
 
 
 

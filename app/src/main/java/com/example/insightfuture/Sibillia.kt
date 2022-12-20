@@ -27,7 +27,7 @@ class Sibillia : AppCompatActivity() {
         var str1pos3 = intent.getStringExtra("str1pos3")
         var str2pos3 =  intent.getStringExtra("str2pos3")
 
-       sibilliaResponse.text = str1pos1 + " " + str2pos1 + "\n" + str1pos2 + " " + str2pos2 + "\n" + str1pos3 + " " + str2pos3
+       sibilliaResponse.text = str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
 
     }
 }

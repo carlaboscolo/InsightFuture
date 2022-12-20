@@ -7,6 +7,7 @@ import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import java.io.IOException
 import android.content.Context
+import android.content.Intent
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
@@ -29,6 +30,14 @@ class MainActivity : AppCompatActivity() {
     private var pos_tripla by Delegates.notNull<String>()
     private var stringa1 by Delegates.notNull<String>()
     private var stringa2 by Delegates.notNull<String>()
+
+    private var str1pos1 by Delegates.notNull<String>()
+    private var str2pos1 by Delegates.notNull<String>()
+    private var str1pos2 by Delegates.notNull<String>()
+    private var str2pos2 by Delegates.notNull<String>()
+    private var str1pos3 by Delegates.notNull<String>()
+    private var str2pos3 by Delegates.notNull<String>()
+
 
     private val KeyLetters = mapOf(
         "k" to 0,
@@ -145,25 +154,47 @@ class MainActivity : AppCompatActivity() {
                      stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
 
 
-        Log.d("data", "$sum ,$sum2,$sum3")
+                   // Log.d("data", "$sum ,$sum2,$sum3")
                     if(pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1"){
                         Log.d("sibComp", "1 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
+
+                        str1pos1 = stringa1
+                        str2pos1 = stringa2
                     }
                     if(pos1 == sum2 && pos2 == sum3 && pos3 == sum && pos_tripla == "2"){
                         Log.d("sibComp", "2 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
+
+                        str1pos2 = stringa1
+                        str2pos2 = stringa2
                     }
                     if(pos1 == sum3 && pos2 == sum && pos3 == sum2 && pos_tripla == "3"){
                         Log.d("sibComp", " 3 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
+
+                        str1pos3 = stringa1
+                        str2pos3 = stringa2
                     }
-                    Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+                   // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
+
+            val intent = Intent(this, Sibillia::class.java)
+            intent.putExtra("str1pos1", str1pos1)
+            intent.putExtra("str2pos1", str2pos1)
+            intent.putExtra("str1pos2", str1pos2)
+            intent.putExtra("str2pos2", str2pos2)
+            intent.putExtra("str1pos3", str1pos3)
+            intent.putExtra("str2pos3", str2pos3)
+            startActivity(intent)
+
             }
+
+
+
         }
 
 

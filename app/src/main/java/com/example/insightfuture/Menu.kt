@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.insightfuture.databinding.ActivityMainBinding
 import com.example.insightfuture.databinding.ActivityMenuBinding
 
 class Menu : AppCompatActivity() {
@@ -28,13 +27,42 @@ class Menu : AppCompatActivity() {
         packageBtn = binding.packageBtn
 
         questionSibBtn.setOnClickListener{
-            launchSecondActivity()
+            launchSibillia()
         }
+
+        storyBtn.setOnClickListener {
+            launchStory()
+        }
+
+        archiveBtn.setOnClickListener {
+            launchArchive()
+        }
+
+        packageBtn.setOnClickListener{
+            launchPackage()
+        }
+
+
 
     }
 
-    private fun launchSecondActivity() {
+    private fun launchSibillia() {
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun launchStory() {
+        val intent = Intent(this, Story::class.java)
+        startActivity(intent)
+    }
+
+    private fun launchArchive() {
+        val intent = Intent(this, Archive::class.java)
+        startActivity(intent)
+    }
+
+    private fun launchPackage() {
+        val intent = Intent(this, Package::class.java)
         startActivity(intent)
     }
 

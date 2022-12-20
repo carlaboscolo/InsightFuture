@@ -11,5 +11,9 @@
     <string name="loading">Caricamento...</string>
     <string name="question">Domanda</string>
     <string name="search">Cerca</string>
+    <string name="interroga_la_sibillia">Interroga la Sibillia</string>
+    <string name="la_storia">La storia</string>
+    <string name="archivio">Archivio</string>
+    <string name="pacchetti">Pacchetti</string>
 
 </resources>

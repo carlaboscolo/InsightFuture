@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sibillia">
+    tools:context=".SibillaActivity">
 
     <TextView
-        android:id="@+id/sibilliaTitle"
+        android:id="@+id/sibillaTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/il_responso_della_sibillia"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.065" />
 
     <TextView
-        android:id="@+id/sibilliaResponse"
+        android:id="@+id/sibillaResponse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/risposta_sibillia"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sibilliaTitle"
+        app:layout_constraintTop_toBottomOf="@+id/sibillaTitle"
         app:layout_constraintVertical_bias="0.199" />
 
 

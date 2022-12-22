@@ -5,13 +5,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
-import java.io.IOException
-import android.content.Context
 import android.content.Intent
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
-import org.json.JSONObject
 import kotlin.properties.Delegates
 
 
@@ -132,10 +127,10 @@ class MainActivity : AppCompatActivity() {
             //getFirstLetter(question.text.toString())
 
 
-            //prende file da sibililia.json in cartella res/raw scritto in minuscolo
+            //prende file da sibilila.json in cartella res/raw scritto in minuscolo
             val jsonData = applicationContext.resources.openRawResource(
             applicationContext.resources.getIdentifier(
-                "sibillia",
+                "sibilla",
                 "raw",
                 applicationContext.packageName
             )
@@ -147,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                //cicla array sibillia
+                //cicla array sibilla
                 for (i in 0 until outputJsonString.length()) {
                      pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
                      pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
@@ -185,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                   // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
 
-            val intent = Intent(this, Sibillia::class.java)
+            val intent = Intent(this, SibillaActivity::class.java)
             intent.putExtra("str1pos1", str1pos1)
             intent.putExtra("str2pos1", str2pos1)
             intent.putExtra("str1pos2", str1pos2)
@@ -240,7 +235,6 @@ class MainActivity : AppCompatActivity() {
 
 
         private fun getNumFromArr(firstLetter :  String)  :  Int {
-
 
             KeyLetters.forEach { (key, value) ->
                     if(firstLetter == key){

@@ -1,25 +1,24 @@
 package com.example.insightfuture
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.insightfuture.databinding.ActivitySibilliaBinding
+import com.example.insightfuture.databinding.ActivitySibillaBinding
 
 
-class Sibillia : AppCompatActivity() {
+class SibillaActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySibilliaBinding
+    private lateinit var binding: ActivitySibillaBinding
 
-    private lateinit var sibilliaResponse : TextView
+    private lateinit var sibillaResponse : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_sibillia)
-        binding = ActivitySibilliaBinding.inflate(layoutInflater)
+       // setContentView(R.layout.activity_sibilla)
+        binding = ActivitySibillaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sibilliaResponse = binding.sibilliaResponse
+        sibillaResponse = binding.sibillaResponse
 
         var str1pos1 = intent.getStringExtra("str1pos1")
         var str2pos1 =  intent.getStringExtra("str2pos1")
@@ -28,7 +27,7 @@ class Sibillia : AppCompatActivity() {
         var str1pos3 = intent.getStringExtra("str1pos3")
         var str2pos3 =  intent.getStringExtra("str2pos3")
 
-       sibilliaResponse.text = str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
+       sibillaResponse.text = str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
 
 
     }

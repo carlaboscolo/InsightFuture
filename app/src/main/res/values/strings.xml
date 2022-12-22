@@ -11,11 +11,11 @@
     <string name="loading">Caricamento...</string>
     <string name="question">Domanda</string>
     <string name="search">Cerca</string>
-    <string name="interroga_la_sibillia">Interroga la Sibillia</string>
+    <string name="interroga_la_sibillia">Interroga la Sibilla</string>
     <string name="la_storia">La storia</string>
     <string name="archivio">Archivio</string>
     <string name="pacchetti">Pacchetti</string>
-    <string name="il_responso_della_sibillia">Il responso della Sibillia</string>
-    <string name="risposta_sibillia">Risposta Sibillia</string>
+    <string name="il_responso_della_sibillia">Il responso della Sibilla</string>
+    <string name="risposta_sibillia">Risposta Sibilla</string>
 
 </resources>

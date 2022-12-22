@@ -27,7 +27,7 @@ class Menu : AppCompatActivity() {
         packageBtn = binding.packageBtn
 
         questionSibBtn.setOnClickListener{
-            launchSibillia()
+            launchSibilla()
         }
 
         storyBtn.setOnClickListener {
@@ -46,7 +46,7 @@ class Menu : AppCompatActivity() {
 
     }
 
-    private fun launchSibillia() {
+    private fun launchSibilla() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

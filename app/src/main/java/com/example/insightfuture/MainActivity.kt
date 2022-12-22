@@ -8,6 +8,7 @@ import com.example.insightfuture.databinding.ActivityMainBinding
 import android.content.Intent
 import com.example.insightfuture.model.User
 import org.json.JSONArray
+import java.io.Serializable
 import kotlin.properties.Delegates
 
 
@@ -86,13 +87,18 @@ class MainActivity : AppCompatActivity() {
        //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
       // Log.d("question", questionReplace)
 
-            val questionUser = User(question.text.toString().toLowerCase(),name.text.toString().toLowerCase(), surname.text.toString().toLowerCase(), bornPlace.text.toString().toLowerCase())
-            Log.d("questionUser", questionUser.toString())
+            val questionUser = question.text.toString().toLowerCase()
+            val nameUser = name.text.toString().toLowerCase()
+            val surnameUser = surname.text.toString().toLowerCase()
+            val bornPlaceUser = bornPlace.text.toString().toLowerCase()
 
-            val arrFirstLetter =  getFirstLetter(question.text.toString().toLowerCase())
-            val nameFirstLetter = getFirstLetter(name.text.toString().toLowerCase())
-            val surnameFirstLetter = getFirstLetter(surname.text.toString().toLowerCase())
-            val bornPlaceFirstLetter = getFirstLetter(bornPlace.text.toString().toLowerCase())
+            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null )
+            Log.d("questionUser", user.toString())
+
+            val arrFirstLetter =  getFirstLetter(questionUser)
+            val nameFirstLetter = getFirstLetter(nameUser)
+            val surnameFirstLetter = getFirstLetter(surnameUser)
+            val bornPlaceFirstLetter = getFirstLetter(bornPlaceUser)
 
             var first: Int? = null
             var last = 0
@@ -184,7 +190,7 @@ class MainActivity : AppCompatActivity() {
                   // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
 
-                 launchSibilla()
+                 launchSibilla(user)
 
             }
 
@@ -192,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         }
 
    //funzione che lancia la schermata con il responso della Sibilla
-    private fun launchSibilla() {
+    private fun launchSibilla(user: User) {
         val intent = Intent(this, SibillaActivity::class.java)
         intent.putExtra("str1pos1", str1pos1)
         intent.putExtra("str2pos1", str2pos1)
@@ -200,6 +206,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("str2pos2", str2pos2)
         intent.putExtra("str1pos3", str1pos3)
         intent.putExtra("str2pos3", str2pos3)
+       intent.putExtra("Obj",user as Serializable)
         startActivity(intent)
     }
 

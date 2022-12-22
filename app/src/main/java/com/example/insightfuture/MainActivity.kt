@@ -87,10 +87,13 @@ class MainActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener{
 
-            val arrFirstLetter =  getFirstLetter(question.text.toString())
-            val nameFirstLetter = getFirstLetter(name.text.toString())
-            val surnameFirstLetter = getFirstLetter(surname.text.toString())
-            val bornPlaceFirstLetter = getFirstLetter(bornPlace.text.toString())
+          // Log.d("question", question.text.toString().toLowerCase().replace("""[\p{P}\p{S}&&[^.]]+""".toRegex(), "") )
+
+
+            val arrFirstLetter =  getFirstLetter(question.text.toString().toLowerCase())
+            val nameFirstLetter = getFirstLetter(name.text.toString().toLowerCase())
+            val surnameFirstLetter = getFirstLetter(surname.text.toString().toLowerCase())
+            val bornPlaceFirstLetter = getFirstLetter(bornPlace.text.toString().toLowerCase())
 
             var first: Int? = null
             var last = 0
@@ -179,7 +182,7 @@ class MainActivity : AppCompatActivity() {
                         str1pos3 = stringa1
                         str2pos3 = stringa2
                     }
-                   // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+                  // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
 
             val intent = Intent(this, Sibillia::class.java)
@@ -239,7 +242,7 @@ class MainActivity : AppCompatActivity() {
 
            if(sum > 99) {
              somma =  sum.toString().substring(2,3)
-           } else if(sum > 10){
+           } else if(sum >= 10){
              somma =   sum.toString().substring(1,2)
            }else{
                somma = sum.toString()

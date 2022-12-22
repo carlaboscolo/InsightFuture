@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener{
 
-          // Log.d("question", question.text.toString().toLowerCase().replace("""[\p{P}\p{S}&&[^.]]+""".toRegex(), "") )
-
+       //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
+      // Log.d("question", questionReplace)
 
             val arrFirstLetter =  getFirstLetter(question.text.toString().toLowerCase())
             val nameFirstLetter = getFirstLetter(name.text.toString().toLowerCase())
@@ -215,8 +215,24 @@ class MainActivity : AppCompatActivity() {
 
         var arrFirstLetter = arrayOf<String>()
 
+     /*   var arrMuta = mutableListOf<String>(*arr)
+
+
+        for (i in arrMuta.indices){
+            if(arrMuta[i] == ""){
+
+                Log.d("progame", "sono entrato nel drop" + arr[i] + "1")
+                arrMuta.removeAt(i)
+
+                if(arrMuta[i] == "") {
+                    Log.d("progame", "sono entrato nel drop DROPPPP" + arrMuta[i] + "2")
+                }
+            }
+        }
+      */
+
         for (i in arr.indices) {
-            arrFirstLetter += arrayOf(arr[i].toString().substring(0, 1))
+            arrFirstLetter += arrayOf(arr[i].substring(0, 1))
         }
 
             return arrFirstLetter

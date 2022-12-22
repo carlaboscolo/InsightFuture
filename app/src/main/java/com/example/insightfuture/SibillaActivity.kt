@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.insightfuture.databinding.ActivitySibillaBinding
 import com.example.insightfuture.model.User
+import com.example.insightfuture.roomDatabase.SibillaDatabase
 import com.example.roomdatabase.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class SibillaActivity : AppCompatActivity() {
@@ -25,6 +30,8 @@ class SibillaActivity : AppCompatActivity() {
         binding = ActivitySibillaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        appDB = AppDatabase.getDatabase(this)
+        writeDataBtn = binding.saveBtn
         sibillaResponse = binding.sibillaResponse
 
         var str1pos1 = intent.getStringExtra("str1pos1")
@@ -42,5 +49,24 @@ class SibillaActivity : AppCompatActivity() {
         receivedObject.response = sibResponse
         Log.d("userResponse", receivedObject.toString())
 
+        writeDataBtn.setOnClickListener {
+            writeData(receivedObject)
+        }
+
     }
+
+
+    private fun writeData(receivedObject: User) {
+
+       val userData = SibillaDatabase(null,null, receivedObject.question,  receivedObject.name, receivedObject.surname, receivedObject.bornPlace, receivedObject.response )
+
+        GlobalScope.launch(Dispatchers.IO){
+            appDB.SibillaDao().insert(userData)
+        }
+
+        Toast.makeText(this@SibillaActivity, "Successfully written", Toast.LENGTH_SHORT).show()
+
+    }
+
+
 }

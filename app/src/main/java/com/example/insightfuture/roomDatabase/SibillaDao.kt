@@ -14,12 +14,14 @@ interface SibillaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(sibilla: SibillaDatabase)
 
-    @Delete
+   /* @Delete
     suspend fun delete(sibilla : SibillaDatabase)
 
     @Query("DELETE FROM sibilla_table")
     suspend fun deleteAll()
 
-  // @Query("UPDATE sibilla_table SET first_name=:firstName, last_name=:lastName WHERE roll_no LIKE :roll")
-   // suspend fun update(firstName : String, lastName : String, roll : Int)
+    @Query("UPDATE sibilla_table SET data=:data, question=:question, name=:name, surname=:surname, bornPlace=:bornPlace, response=:response WHERE data LIKE :data")
+    suspend fun update(data : String, question : String, name : String, surname : String, bornPlace : String, response : String)
+
+    */
 }

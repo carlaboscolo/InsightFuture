@@ -180,25 +180,26 @@ class MainActivity : AppCompatActivity() {
                   // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
 
-            val intent = Intent(this, SibillaActivity::class.java)
-            intent.putExtra("str1pos1", str1pos1)
-            intent.putExtra("str2pos1", str2pos1)
-            intent.putExtra("str1pos2", str1pos2)
-            intent.putExtra("str2pos2", str2pos2)
-            intent.putExtra("str1pos3", str1pos3)
-            intent.putExtra("str2pos3", str2pos3)
-            startActivity(intent)
+                 launchSibilla()
 
             }
 
 
-
         }
 
+   //funzione che lancia la schermata con il responso della Sibilla
+    private fun launchSibilla() {
+        val intent = Intent(this, SibillaActivity::class.java)
+        intent.putExtra("str1pos1", str1pos1)
+        intent.putExtra("str2pos1", str2pos1)
+        intent.putExtra("str1pos2", str1pos2)
+        intent.putExtra("str2pos2", str2pos2)
+        intent.putExtra("str1pos3", str1pos3)
+        intent.putExtra("str2pos3", str2pos3)
+        startActivity(intent)
+    }
 
-
-
-
+   //funzione che prende le prime lettere delle stringhe
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
         val arr = stringa.split(delim).toTypedArray()
@@ -234,6 +235,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    //funzione che prende il valore della tabella in base alla lettera
         private fun getNumFromArr(firstLetter :  String)  :  Int {
 
             KeyLetters.forEach { (key, value) ->
@@ -246,7 +248,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+       //funzione che prende l'unità dei numeri
         private fun getRightNumber(sum : Int) : Int {
           var somma = " "
 
@@ -261,6 +263,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("Sum", somma.toString())
             return somma.toInt()
         }
+
 
 
 

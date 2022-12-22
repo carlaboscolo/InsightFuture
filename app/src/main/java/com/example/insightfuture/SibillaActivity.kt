@@ -2,8 +2,10 @@ package com.example.insightfuture
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import com.example.insightfuture.databinding.ActivitySibillaBinding
+import com.example.roomdatabase.AppDatabase
 
 
 class SibillaActivity : AppCompatActivity() {
@@ -11,6 +13,9 @@ class SibillaActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySibillaBinding
 
     private lateinit var sibillaResponse : TextView
+
+    private lateinit var appDB : AppDatabase
+    private lateinit var writeDataBtn : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,7 @@ class SibillaActivity : AppCompatActivity() {
         var str2pos2 =  intent.getStringExtra("str2pos2")
         var str1pos3 = intent.getStringExtra("str1pos3")
         var str2pos3 =  intent.getStringExtra("str2pos3")
+
 
        sibillaResponse.text = str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
 

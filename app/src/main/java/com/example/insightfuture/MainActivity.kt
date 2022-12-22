@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import android.content.Intent
+import com.example.insightfuture.model.User
 import org.json.JSONArray
 import kotlin.properties.Delegates
 
@@ -84,6 +85,9 @@ class MainActivity : AppCompatActivity() {
 
        //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
       // Log.d("question", questionReplace)
+
+            val questionUser = User(question.text.toString().toLowerCase(),name.text.toString().toLowerCase(), surname.text.toString().toLowerCase(), bornPlace.text.toString().toLowerCase())
+            Log.d("questionUser", questionUser.toString())
 
             val arrFirstLetter =  getFirstLetter(question.text.toString().toLowerCase())
             val nameFirstLetter = getFirstLetter(name.text.toString().toLowerCase())

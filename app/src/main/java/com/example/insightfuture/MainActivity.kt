@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             val surnameUser = surname.text.toString().toLowerCase()
             val bornPlaceUser = bornPlace.text.toString().toLowerCase()
 
-            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null )
+            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null, null)
             Log.d("questionUser", user.toString())
 
             val arrFirstLetter =  getFirstLetter(questionUser)

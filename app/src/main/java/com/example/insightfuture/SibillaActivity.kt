@@ -13,6 +13,8 @@ import com.example.roomdatabase.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class SibillaActivity : AppCompatActivity() {
@@ -56,16 +58,37 @@ class SibillaActivity : AppCompatActivity() {
     }
 
 
+    //funzione che scrive i dati nel database locale
     private fun writeData(receivedObject: User) {
 
-       val userData = SibillaDatabase(null,null, receivedObject.question,  receivedObject.name, receivedObject.surname, receivedObject.bornPlace, receivedObject.response )
+        val today = calendar()
+        //val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+        //val saveData: Date = dateFormat.parse(today)
+        Log.d("saveData", "oggi " + today.toString())
+
+        val userData = SibillaDatabase(null,today, receivedObject.question,  receivedObject.name, receivedObject.surname, receivedObject.bornPlace, receivedObject.response )
 
         GlobalScope.launch(Dispatchers.IO){
             appDB.SibillaDao().insert(userData)
         }
 
         Toast.makeText(this@SibillaActivity, "Successfully written", Toast.LENGTH_SHORT).show()
+    }
 
+    //selezionare la data di oggi
+    fun calendar(): String {
+        val calendar = Calendar.getInstance()
+        val year = calendar[Calendar.YEAR]
+        val day = calendar[Calendar.DAY_OF_MONTH]
+        val month = calendar[Calendar.MONTH] + 1
+
+        val dayString = if (day < 10) "0$day" else "$day"
+        val monthString = if (month < 10) "0$month" else "$month"
+
+        val data_string = "$dayString-$monthString-$year"
+
+        Log.d("data", data_string)
+        return data_string
     }
 
 

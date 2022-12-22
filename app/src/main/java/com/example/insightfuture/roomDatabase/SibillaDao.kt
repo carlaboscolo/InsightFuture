@@ -6,7 +6,8 @@ import androidx.room.*
 interface SibillaDao {
 
     @Query("SELECT * FROM sibilla_table")
-    fun getAll() : List<SibillaDatabase>
+    suspend fun getAll() : SibillaDatabase
+    //fun getAll() : List<SibillaDatabase>
 
     @Query("SELECT * FROM sibilla_table WHERE data LIKE :data LIMIT 1")
     suspend fun findByData(data : String) : SibillaDatabase

@@ -14,3 +14,4 @@ data class SibillaDatabase(
     @ColumnInfo(name = "bornPlace") val bornPlace : String?,
     @ColumnInfo(name = "response") val response : String?,
 )
+

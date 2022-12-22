@@ -18,5 +18,7 @@
     <string name="il_responso_della_sibillia">Il responso della Sibilla</string>
     <string name="risposta_sibillia">Risposta Sibilla</string>
     <string name="salva">Salva</string>
+    <string name="data">Data</string>
+    <string name="responso">Responso</string>
 
 </resources>

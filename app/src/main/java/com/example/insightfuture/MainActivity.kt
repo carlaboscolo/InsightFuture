@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
         "s" to 2,
         "m" to 3,
         "t" to 3,
-        "i" to 4,
+        "l" to 4,
         "o" to 4,
         "a" to 5,
         "g" to 5,
-        "l" to 6,
+        "i" to 6,
         "j" to 6,
         "n" to 6,
         "c" to 7,
@@ -107,11 +107,11 @@ class MainActivity : AppCompatActivity() {
             for(i in arrFirstLetter.indices){
                 if(first == null){
                     first = getNumFromArr(arrFirstLetter[i])
-                    Log.d("first", "first" + first)
+                    Log.d("first", "first " + first)
                 }
 
                 last = getNumFromArr(arrFirstLetter[i])
-                Log.d("first", "last" + last)
+                Log.d("first", "last " + last)
 
                 sum = sum + getNumFromArr(arrFirstLetter[i])
 
@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                      stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
 
 
-                   // Log.d("data", "$sum ,$sum2,$sum3")
+                    Log.d("somme", "$sum ,$sum2,$sum3")
                     if(pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1"){
                         Log.d("sibComp", "1 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
@@ -251,7 +251,7 @@ class MainActivity : AppCompatActivity() {
 
             KeyLetters.forEach { (key, value) ->
                     if(firstLetter == key){
-                        Log.d("first", "sono entrato qui $key")
+                        Log.d("first", "sono entrato qui $key $value")
                         return value
                     }
                }

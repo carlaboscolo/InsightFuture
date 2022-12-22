@@ -1,10 +1,11 @@
 package com.example.insightfuture
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.insightfuture.databinding.ActivityMainBinding
 import com.example.insightfuture.databinding.ActivitySibilliaBinding
+
 
 class Sibillia : AppCompatActivity() {
 
@@ -28,6 +29,7 @@ class Sibillia : AppCompatActivity() {
         var str2pos3 =  intent.getStringExtra("str2pos3")
 
        sibilliaResponse.text = str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
+
 
     }
 }

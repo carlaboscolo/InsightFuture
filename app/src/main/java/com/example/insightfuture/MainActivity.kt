@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import android.content.Intent
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.model.User
 import org.json.JSONArray
@@ -88,93 +89,109 @@ class MainActivity : AppCompatActivity() {
 
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
-        searchBtn.setOnClickListener{
+        searchBtn.setOnClickListener {
 
-       //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
-      // Log.d("question", questionReplace)
+            //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
+            // Log.d("question", questionReplace)
 
-            val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val nameUser = name.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val surnameUser = surname.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val bornPlaceUser = bornPlace.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val questionUser = question.text.toString().toLowerCase()
+                .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val nameUser = name.text.toString().toLowerCase()
+                .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val surnameUser = surname.text.toString().toLowerCase()
+                .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val bornPlaceUser = bornPlace.text.toString().toLowerCase()
+                .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
 
-            if(questionUser.isEmpty() || nameUser.isEmpty() || surnameUser.isEmpty() || bornPlaceUser.isEmpty() ){
-                createDialog()
-                alertDialog?.show()
-            }
+            if (questionUser.isEmpty() || nameUser.isEmpty() || surnameUser.isEmpty() || bornPlaceUser.isEmpty()) {
+                val builder = AlertDialog.Builder(this)
 
-            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null)
-            Log.d("questionUser", user.toString())
+                builder.setMessage("Non lasciare campi vuoti")
+                builder.setNeutralButton("Ok") { dialog, which ->
+                    Toast.makeText(
+                        applicationContext,
+                        "Ok", Toast.LENGTH_SHORT
+                    ).show()
+                }
+                builder.show()
+            } else {
 
-            val arrFirstLetter =  getFirstLetter(questionUser)
-            val nameFirstLetter = getFirstLetter(nameUser)
-            val surnameFirstLetter = getFirstLetter(surnameUser)
-            val bornPlaceFirstLetter = getFirstLetter(bornPlaceUser)
+                val user = User(questionUser, nameUser, surnameUser, bornPlaceUser, null)
+                Log.d("questionUser", user.toString())
 
-            var first: Int? = null
-            var last = 0
-            var sum  = 0
+                val arrFirstLetter = getFirstLetter(questionUser)
+                val nameFirstLetter = getFirstLetter(nameUser)
+                val surnameFirstLetter = getFirstLetter(surnameUser)
+                val bornPlaceFirstLetter = getFirstLetter(bornPlaceUser)
 
-            for(i in arrFirstLetter.indices){
-                if(first == null){
-                    first = getNumFromArr(arrFirstLetter[i])
-                    Log.d("first", "first " + first)
+                var first: Int? = null
+                var last = 0
+                var sum = 0
+
+                for (i in arrFirstLetter.indices) {
+                    if (first == null) {
+                        first = getNumFromArr(arrFirstLetter[i])
+                        Log.d("first", "first " + first)
+                    }
+
+                    last = getNumFromArr(arrFirstLetter[i])
+                    Log.d("first", "last " + last)
+
+                    sum = sum + getNumFromArr(arrFirstLetter[i])
+
                 }
 
-                last = getNumFromArr(arrFirstLetter[i])
-                Log.d("first", "last " + last)
-
-                sum = sum + getNumFromArr(arrFirstLetter[i])
-
-            }
-
-            sum = getRightNumber(sum)
-            Log.d("first", "somma : " + sum )
+                sum = getRightNumber(sum)
+                Log.d("first", "somma : " + sum)
 
 
-           var sum2 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + getNumFromArr(bornPlaceFirstLetter[0]) + last
-            sum2 = getRightNumber(sum2)
-            Log.d("first", "somma 2 : " + sum2 )
+                var sum2 =
+                    getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + getNumFromArr(
+                        bornPlaceFirstLetter[0]
+                    ) + last
+                sum2 = getRightNumber(sum2)
+                Log.d("first", "somma 2 : " + sum2)
 
-           var sum3 = getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + first!! + last
-            sum3 = getRightNumber(sum3)
-            Log.d("first", "somma 3 : " + sum3 )
+                var sum3 =
+                    getNumFromArr(nameFirstLetter[0]) + getNumFromArr(surnameFirstLetter[0]) + first!! + last
+                sum3 = getRightNumber(sum3)
+                Log.d("first", "somma 3 : " + sum3)
 
-            var triplette1 = sum.toString() + sum2.toString() + sum3.toString()
-            var triplette2 = sum2.toString() + sum3.toString() +  sum.toString()
-            var triplette3 = sum3.toString() + sum.toString() + sum2.toString()
-            Log.d("triple" , triplette1 + " " + triplette2 + " " + triplette3)
+                var triplette1 = sum.toString() + sum2.toString() + sum3.toString()
+                var triplette2 = sum2.toString() + sum3.toString() + sum.toString()
+                var triplette3 = sum3.toString() + sum.toString() + sum2.toString()
+                Log.d("triple", triplette1 + " " + triplette2 + " " + triplette3)
 
-            //getFirstLetter(question.text.toString())
-
-
-            //prende file da sibilila.json in cartella res/raw scritto in minuscolo
-            val jsonData = applicationContext.resources.openRawResource(
-            applicationContext.resources.getIdentifier(
-                "sibilla",
-                "raw",
-                applicationContext.packageName
-            )
-            ).bufferedReader().use { it.readText() }
+                //getFirstLetter(question.text.toString())
 
 
-            val outputJsonString = JSONArray(jsonData)
-            //Log.d("sib", outputJsonString.toString()) //stampa tutti i dati
+                //prende file da sibilila.json in cartella res/raw scritto in minuscolo
+                val jsonData = applicationContext.resources.openRawResource(
+                    applicationContext.resources.getIdentifier(
+                        "sibilla",
+                        "raw",
+                        applicationContext.packageName
+                    )
+                ).bufferedReader().use { it.readText() }
 
+
+                val outputJsonString = JSONArray(jsonData)
+                //Log.d("sib", outputJsonString.toString()) //stampa tutti i dati
 
 
                 //cicla array sibilla
                 for (i in 0 until outputJsonString.length()) {
-                     pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
-                     pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
-                     pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
-                     pos_tripla = outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
-                     stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
-                     stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
+                    pos1 = outputJsonString.getJSONObject(i).getString("pos1").toInt()
+                    pos2 = outputJsonString.getJSONObject(i).getString("pos2").toInt()
+                    pos3 = outputJsonString.getJSONObject(i).getString("pos3").toInt()
+                    pos_tripla =
+                        outputJsonString.getJSONObject(i).getString("pos_tripla").toString()
+                    stringa1 = outputJsonString.getJSONObject(i).getString("stringa1").toString()
+                    stringa2 = outputJsonString.getJSONObject(i).getString("stringa2").toString()
 
 
                     Log.d("somme", "$sum ,$sum2,$sum3")
-                    if(pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1"){
+                    if (pos1 == sum && pos2 == sum2 && pos3 == sum3 && pos_tripla == "1") {
                         Log.d("sibComp", "1 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
@@ -182,7 +199,7 @@ class MainActivity : AppCompatActivity() {
                         str1pos1 = stringa1
                         str2pos1 = stringa2
                     }
-                    if(pos1 == sum2 && pos2 == sum3 && pos3 == sum && pos_tripla == "2"){
+                    if (pos1 == sum2 && pos2 == sum3 && pos3 == sum && pos_tripla == "2") {
                         Log.d("sibComp", "2 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
@@ -190,7 +207,7 @@ class MainActivity : AppCompatActivity() {
                         str1pos2 = stringa1
                         str2pos2 = stringa2
                     }
-                    if(pos1 == sum3 && pos2 == sum && pos3 == sum2 && pos_tripla == "3"){
+                    if (pos1 == sum3 && pos2 == sum && pos3 == sum2 && pos_tripla == "3") {
                         Log.d("sibComp", " 3 tripletta")
                         Log.d("sibComp", "Stringa 1: $stringa1 ") //prova comparazione pos1
                         Log.d("sibComp", "Stringa 2: $stringa2 ") //prova comparazione pos1
@@ -198,14 +215,14 @@ class MainActivity : AppCompatActivity() {
                         str1pos3 = stringa1
                         str2pos3 = stringa2
                     }
-                  // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
+                    // Log.d("sib", "pos1 $pos1") //prova stampa pos1 funzionante
                 }
 
-                 launchSibilla(user)
+                launchSibilla(user)
 
             }
 
-
+        }
         }
 
    //funzione che lancia la schermata con il responso della Sibilla

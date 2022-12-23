@@ -1,4 +1,5 @@
 package com.example.insightfuture
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -6,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.model.User
 import org.json.JSONArray
 import java.io.Serializable
@@ -14,6 +16,8 @@ import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
+
+    var alertDialog: AlertDialog? = null
 
     private lateinit var binding: ActivityMainBinding
 
@@ -81,6 +85,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener{
@@ -92,6 +97,11 @@ class MainActivity : AppCompatActivity() {
             val nameUser = name.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             val surnameUser = surname.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             val bornPlaceUser = bornPlace.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+
+            if(questionUser.isEmpty() || nameUser.isEmpty() || surnameUser.isEmpty() || bornPlaceUser.isEmpty() ){
+                createDialog()
+                alertDialog?.show()
+            }
 
             val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null)
             Log.d("questionUser", user.toString())
@@ -211,6 +221,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+
    //funzione che prende le prime lettere delle stringhe
     private fun getFirstLetter(stringa : String): Array<String> {
         val delim = " "
@@ -280,12 +291,27 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    private fun createDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Errore")
+        alertDialogBuilder.setMessage("Inserisci tutti i campi")
+        alertDialogBuilder.setPositiveButton("Ok") { _: DialogInterface, _: Int ->
+            finish()
+        }
+        alertDialogBuilder.setNegativeButton("No", { dialogInterface: DialogInterface, i: Int -> })
+
+        alertDialog = alertDialogBuilder.create()
+    }
+
 
 }
 
 private fun String.Normalize(): String {
     return Normalizer.normalize(this, Normalizer.Form.NFD).replace("[^\\p{ASCII}]".toRegex(), "")
 }
+
+
+
 
 
 

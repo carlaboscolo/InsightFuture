@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.insightfuture.ArchiveAdapter
 import com.example.insightfuture.databinding.ActivityArchiveBinding
 import com.example.roomdatabase.AppDatabase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class Archive : AppCompatActivity() {
+class ArchiveActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityArchiveBinding
     private lateinit var backBtn : Button
@@ -34,10 +33,10 @@ class Archive : AppCompatActivity() {
         super.onResume()
 
         lifecycleScope.launch {
-            val archiveList = AppDatabase(this@Archive).sibillaDao().getAll()
+            val archiveList = AppDatabase(this@ArchiveActivity).sibillaDao().getAll()
 
             binding.recyclerView.apply {
-                layoutManager = LinearLayoutManager(this@Archive)
+                layoutManager = LinearLayoutManager(this@ArchiveActivity)
                 adapter = ArchiveAdapter().apply {
                     setData(archiveList)
                 }

@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.example.insightfuture.archive.Archive
+import com.example.insightfuture.archive.ArchiveActivity
 import com.example.insightfuture.databinding.ActivitySibillaBinding
 import com.example.insightfuture.model.User
 import com.example.insightfuture.roomDatabase.SibillaDatabase
@@ -100,7 +100,7 @@ class SibillaActivity : AppCompatActivity() {
     }
 
     private fun launchArchive() {
-        val intent = Intent(this, Archive::class.java)
+        val intent = Intent(this, ArchiveActivity::class.java)
         startActivity(intent)
     }
 

@@ -4,10 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.insightfuture.archive.Archive
+import com.example.insightfuture.archive.ArchiveActivity
 import com.example.insightfuture.databinding.ActivityMenuBinding
 
-class Menu : AppCompatActivity() {
+class MenuActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMenuBinding
 
@@ -53,17 +53,17 @@ class Menu : AppCompatActivity() {
     }
 
     private fun launchStory() {
-        val intent = Intent(this, Story::class.java)
+        val intent = Intent(this, StoryActivity::class.java)
         startActivity(intent)
     }
 
     private fun launchArchive() {
-        val intent = Intent(this, Archive::class.java)
+        val intent = Intent(this, ArchiveActivity::class.java)
         startActivity(intent)
     }
 
     private fun launchPackage() {
-        val intent = Intent(this, Package::class.java)
+        val intent = Intent(this, PackageActivity::class.java)
         startActivity(intent)
     }
 

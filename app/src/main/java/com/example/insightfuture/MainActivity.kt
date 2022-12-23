@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             val surnameUser = surname.text.toString().toLowerCase()
             val bornPlaceUser = bornPlace.text.toString().toLowerCase()
 
-            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null, null)
+            val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null)
             Log.d("questionUser", user.toString())
 
             val arrFirstLetter =  getFirstLetter(questionUser)
@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("str2pos2", str2pos2)
         intent.putExtra("str1pos3", str1pos3)
         intent.putExtra("str2pos3", str2pos3)
-       intent.putExtra("Obj",user as Serializable)
+        intent.putExtra("Obj",user as Serializable)
         startActivity(intent)
     }
 

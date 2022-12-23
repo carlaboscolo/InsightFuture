@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.insightfuture.archive.Archive
 import com.example.insightfuture.databinding.ActivityMenuBinding
 
 class Menu : AppCompatActivity() {

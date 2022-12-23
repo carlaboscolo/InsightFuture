@@ -1,11 +1,14 @@
 package com.example.insightfuture
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.insightfuture.archive.Archive
+import com.example.insightfuture.archive.model.Response
 import com.example.insightfuture.databinding.ActivitySibillaBinding
 import com.example.insightfuture.model.User
 import com.example.insightfuture.roomDatabase.SibillaDatabase
@@ -13,6 +16,7 @@ import com.example.roomdatabase.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.Serializable
 import java.util.*
 
 
@@ -24,6 +28,9 @@ class SibillaActivity : AppCompatActivity() {
 
     private lateinit var appDB : AppDatabase
     private lateinit var writeDataBtn : Button
+    private lateinit var archiveBtn : Button
+
+    val responses = ArrayList<Response>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,7 @@ class SibillaActivity : AppCompatActivity() {
         appDB = AppDatabase.getDatabase(this)
         writeDataBtn = binding.saveBtn
         sibillaResponse = binding.sibillaResponse
+        archiveBtn = binding.archiBtn
 
         var str1pos1 = intent.getStringExtra("str1pos1")
         var str2pos1 =  intent.getStringExtra("str2pos1")
@@ -54,6 +62,10 @@ class SibillaActivity : AppCompatActivity() {
             writeData(receivedObject)
         }
 
+        archiveBtn.setOnClickListener {
+            launchArchive()
+        }
+
     }
 
 
@@ -68,10 +80,17 @@ class SibillaActivity : AppCompatActivity() {
         val userData = SibillaDatabase(null,today, receivedObject.question,  receivedObject.name, receivedObject.surname, receivedObject.bornPlace, receivedObject.response )
 
         GlobalScope.launch(Dispatchers.IO){
-            appDB.SibillaDao().insert(userData)
+            appDB.sibillaDao().insert(userData)
         }
 
         Toast.makeText(this@SibillaActivity, "Successfully written", Toast.LENGTH_SHORT).show()
+
+        val string = receivedObject.question + receivedObject.name + receivedObject.surname + receivedObject.bornPlace + receivedObject.response
+
+        val responses1 = Response(today, string)
+        responses.add(responses1)
+        Log.d("resSib", responses.toString())
+
     }
 
     //selezionare la data di oggi
@@ -90,5 +109,9 @@ class SibillaActivity : AppCompatActivity() {
         return data_string
     }
 
+    private fun launchArchive() {
+        val intent = Intent(this, Archive::class.java)
+        startActivity(intent)
+    }
 
 }

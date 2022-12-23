@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.insightfuture.roomDatabase.SibillaDatabase
-import com.example.roomdatabase.AppDatabase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.insightfuture.archive.model.Response
 
-class ArchiveAdapter(private val archives : ArrayList<SibillaDatabase>,
-                     private val context: Context, private var appDB: AppDatabase)
+class ArchiveAdapter(private val archives: ArrayList<Response>,
+                     private val context: Context
+)
     : RecyclerView.Adapter<ArchiveAdapter.CustomViewHolder>() {
+
 
     class CustomViewHolder(val view: ViewGroup)
         : RecyclerView.ViewHolder(view)
@@ -29,20 +28,11 @@ class ArchiveAdapter(private val archives : ArrayList<SibillaDatabase>,
 
         val archive = archives[position]
 
-        lateinit var sibilla: SibillaDatabase
-        appDB = AppDatabase.getDatabase(this)
+        val dataText = holder.view.findViewById<TextView>(R.id.dataText)
+        dataText.text = archive.data
 
-        GlobalScope.launch {
-            sibilla = appDB.SibillaDao().getAll()
-
-            val dataText = holder.view.findViewById<TextView>(R.id.dataText)
-            dataText.text = sibilla.data
-
-            val string = sibilla.question + sibilla.name + sibilla.surname + sibilla.bornPlace + sibilla.response
-            val responseText = holder.view.findViewById<TextView>(R.id.responseText)
-            responseText.text = string
-
-        }
+        val responseText = holder.view.findViewById<TextView>(R.id.responseText)
+        responseText.text = archive.response
 
         holder.view.setOnClickListener {
             /*val intent = Intent(context, DetailActivity::class.java)
@@ -50,6 +40,7 @@ class ArchiveAdapter(private val archives : ArrayList<SibillaDatabase>,
             context.startActivity(intent)*/
             mListener?.selectItem(position)
         }
+
     }
 
 

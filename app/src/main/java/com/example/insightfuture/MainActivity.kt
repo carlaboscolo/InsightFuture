@@ -9,6 +9,7 @@ import android.content.Intent
 import com.example.insightfuture.model.User
 import org.json.JSONArray
 import java.io.Serializable
+import java.text.Normalizer
 import kotlin.properties.Delegates
 
 
@@ -87,10 +88,10 @@ class MainActivity : AppCompatActivity() {
        //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
       // Log.d("question", questionReplace)
 
-            val questionUser = question.text.toString().toLowerCase()
-            val nameUser = name.text.toString().toLowerCase()
-            val surnameUser = surname.text.toString().toLowerCase()
-            val bornPlaceUser = bornPlace.text.toString().toLowerCase()
+            val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val nameUser = name.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val surnameUser = surname.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val bornPlaceUser = bornPlace.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
 
             val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null)
             Log.d("questionUser", user.toString())
@@ -239,7 +240,9 @@ class MainActivity : AppCompatActivity() {
       */
 
         for (i in arr.indices) {
-            arrFirstLetter += arrayOf(arr[i].substring(0, 1))
+            if(arr[i] != "") {
+                arrFirstLetter += arrayOf(arr[i].substring(0, 1))
+            }
         }
 
             return arrFirstLetter
@@ -263,7 +266,7 @@ class MainActivity : AppCompatActivity() {
         private fun getRightNumber(sum : Int) : Int {
           var somma = " "
 
-           if(sum > 99) {
+           if(sum > 99 ) {
              somma =  sum.toString().substring(2,3)
            } else if(sum >= 10){
              somma =   sum.toString().substring(1,2)
@@ -278,6 +281,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
+}
+
+private fun String.Normalize(): String {
+    return Normalizer.normalize(this, Normalizer.Form.NFD).replace("[^\\p{ASCII}]".toRegex(), "")
 }
 
 

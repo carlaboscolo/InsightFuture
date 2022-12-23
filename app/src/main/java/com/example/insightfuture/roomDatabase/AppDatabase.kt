@@ -7,31 +7,26 @@ import androidx.room.RoomDatabase
 import com.example.insightfuture.roomDatabase.SibillaDao
 import com.example.insightfuture.roomDatabase.SibillaDatabase
 
+
 @Database(entities = [SibillaDatabase :: class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase: RoomDatabase() {
     abstract fun sibillaDao() : SibillaDao
 
     companion object{
         @Volatile
-        private var INSTANCE : AppDatabase? = null
+        private var instance : AppDatabase? = null
+        private val LOCK = Any()
 
-        fun getDatabase(context: Context) : AppDatabase{
-            val tempIstance = INSTANCE
-
-            if(tempIstance != null){
-                return tempIstance
-            }
-
-            synchronized(this){
-                val istance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "app_database"
-                ).build()
-                INSTANCE = istance
-                return istance
+        operator fun invoke(context : Context) = instance ?: synchronized(LOCK){
+            instance ?: buildDatabase(context).also{
+                instance = it
             }
         }
 
+        private fun buildDatabase(context: Context) = Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java,
+            " app_database"
+        ).build()
     }
 }

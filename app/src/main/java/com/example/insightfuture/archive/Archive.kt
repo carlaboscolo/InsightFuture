@@ -3,11 +3,13 @@ package com.example.insightfuture.archive
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.insightfuture.ArchiveAdapter
-import com.example.insightfuture.archive.model.Response
 import com.example.insightfuture.databinding.ActivityArchiveBinding
-import com.example.insightfuture.model.User
+import com.example.roomdatabase.AppDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class Archive : AppCompatActivity() {
 
@@ -26,23 +28,22 @@ class Archive : AppCompatActivity() {
             finish()
         }
 
-        val archives = ArrayList<Response>()
+    }
 
-        val recyclerView = binding.recyclerView
-        val archiveAdapter = ArchiveAdapter(archives, this@Archive)
-        recyclerView.apply {
-            adapter = archiveAdapter
-            layoutManager = LinearLayoutManager(this@Archive, LinearLayoutManager.VERTICAL, false)
-        }
+    override fun onResume() {
+        super.onResume()
 
-       /* archiveAdapter.setOnCallback(object : ArchiveAdapter.AdapterCallback{
-            override fun selectItem(position: Int) {
-                Log.d("LogAdapter", "Product: $position")
-                val intent = Intent(this@Archive, DetailActivity::class.java)
-                startActivity(intent)
+        lifecycleScope.launch {
+            val archiveList = AppDatabase(this@Archive).sibillaDao().getAll()
+
+            binding.recyclerView.apply {
+                layoutManager = LinearLayoutManager(this@Archive)
+                adapter = ArchiveAdapter().apply {
+                    setData(archiveList)
+                }
             }
-        }) */
 
+        }
     }
 
 }

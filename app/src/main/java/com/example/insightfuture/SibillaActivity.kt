@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.insightfuture.archive.Archive
-import com.example.insightfuture.archive.model.Response
 import com.example.insightfuture.databinding.ActivitySibillaBinding
 import com.example.insightfuture.model.User
 import com.example.insightfuture.roomDatabase.SibillaDatabase
@@ -16,7 +15,6 @@ import com.example.roomdatabase.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.Serializable
 import java.util.*
 
 
@@ -30,7 +28,6 @@ class SibillaActivity : AppCompatActivity() {
     private lateinit var writeDataBtn : Button
     private lateinit var archiveBtn : Button
 
-    val responses = ArrayList<Response>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +35,7 @@ class SibillaActivity : AppCompatActivity() {
         binding = ActivitySibillaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        appDB = AppDatabase.getDatabase(this)
+        appDB = AppDatabase.invoke(this)
         writeDataBtn = binding.saveBtn
         sibillaResponse = binding.sibillaResponse
         archiveBtn = binding.archiBtn
@@ -84,13 +81,6 @@ class SibillaActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this@SibillaActivity, "Successfully written", Toast.LENGTH_SHORT).show()
-
-        val string = receivedObject.question + receivedObject.name + receivedObject.surname + receivedObject.bornPlace + receivedObject.response
-
-        val responses1 = Response(today, string)
-        responses.add(responses1)
-        Log.d("resSib", responses.toString())
-
     }
 
     //selezionare la data di oggi

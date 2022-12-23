@@ -88,10 +88,10 @@ class MainActivity : AppCompatActivity() {
        //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
       // Log.d("question", questionReplace)
 
-            val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val nameUser = name.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val surnameUser = surname.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val bornPlaceUser = bornPlace.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val nameUser = name.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val surnameUser = surname.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            val bornPlaceUser = bornPlace.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
 
             val user = User(questionUser,nameUser, surnameUser , bornPlaceUser, null)
             Log.d("questionUser", user.toString())

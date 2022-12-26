@@ -11,8 +11,9 @@ interface SibillaDao {
     // @Query("SELECT * FROM sibilla_table WHERE data LIKE :data LIMIT 1")
     // suspend fun findByData(data : String) : SibillaDatabase
 
-    // @Query("SELECT * FROM sibilla_table WHERE name, surname, bornPlace, data, question LIKE : query% ")
-    // suspend fun findByQuery(query : String) : SibillaDatabase
+   //  @Query("SELECT * FROM sibilla_table WHERE name OR surname OR bornPlace OR data OR question LIKE :query ")
+   @Query("SELECT * FROM sibilla_table WHERE name LIKE :query ")
+   suspend fun findByQuery(query : String) : SibillaDatabase
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(sibilla: SibillaDatabase)

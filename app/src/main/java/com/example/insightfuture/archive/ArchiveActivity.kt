@@ -2,20 +2,21 @@ package com.example.insightfuture.archive
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.insightfuture.ArchiveAdapter
 import com.example.insightfuture.databinding.ActivityArchiveBinding
+import com.example.insightfuture.roomDatabase.SibillaDatabase
 import com.example.roomdatabase.AppDatabase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArchiveActivity : AppCompatActivity() {
 
+    private lateinit var appDB : AppDatabase
     private lateinit var binding : ActivityArchiveBinding
     private lateinit var backBtn : Button
     private lateinit var searchBtn : Button
@@ -28,8 +29,9 @@ class ArchiveActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         backBtn = binding.backBtn
-        searchBtn = binding.backBtn
+        searchBtn = binding.searchBtn
         searchText = binding.searchBar
+        appDB = AppDatabase.invoke(this)
 
         backBtn.setOnClickListener{
             finish()
@@ -37,11 +39,15 @@ class ArchiveActivity : AppCompatActivity() {
 
         searchBtn.setOnClickListener {
 
-            val searchQuery = searchText.text.toString().toLowerCase()
+           /* val searchQuery = searchText.text.toString().toLowerCase()
 
             if(searchQuery.isNotEmpty()){
-               readData()
+               readData(searchQuery)
             }
+
+            */
+
+            readData()
 
         }
 
@@ -78,19 +84,23 @@ class ArchiveActivity : AppCompatActivity() {
  */
 
 
-private fun readData(){
-  /* val rollNo = binding.etRollNoRead.text.toString()
+private fun readData( /*   searchQuery: String  */) {
 
-   if(rollNo.isNotEmpty()){
-       lateinit var student: Student
+    val searchQuery = binding.searchBar.text.toString().toLowerCase()
 
-       GlobalScope.launch {
-           student = appDB.studentDao().findByRoll(rollNo.toInt())
-           displayData(student)
-       }
+    if(searchQuery.isNotEmpty()){
+        lateinit var sibilla : SibillaDatabase
 
-   }
-   */
+        GlobalScope.launch {
+            sibilla = appDB.sibillaDao().findByQuery(searchQuery)
+            Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+            //  displayData(sibilla)
+        }
+
+       // binding.searchBar.text.clear()
+
+    }
+
 }
 
 }

@@ -29,6 +29,7 @@ class SibillaActivity : AppCompatActivity() {
     private lateinit var mainBtn : Button
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_sibilla)
@@ -56,6 +57,7 @@ class SibillaActivity : AppCompatActivity() {
         Log.d("userResponse", receivedObject.toString())
 
         writeDataBtn.setOnClickListener {
+            receivedObject.response = sibillaResponse.text.toString()
             writeData(receivedObject)
         }
 
@@ -80,7 +82,7 @@ class SibillaActivity : AppCompatActivity() {
             appDB.sibillaDao().insert(userData)
         }
 
-        Toast.makeText(this@SibillaActivity, "Successfully written", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@SibillaActivity, "Salvato nell'archivio!", Toast.LENGTH_SHORT).show()
     }
 
     //selezionare la data di oggi
@@ -100,7 +102,7 @@ class SibillaActivity : AppCompatActivity() {
     }
 
     private fun launchArchive() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)
     }
 

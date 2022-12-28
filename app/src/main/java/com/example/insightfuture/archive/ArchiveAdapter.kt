@@ -13,8 +13,13 @@ class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ArchiveViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ArchiveViewHolder{
-        val view = LayoutInflater.from(parent.context) .inflate(R.layout.view_archive, parent, false)
+        val view = LayoutInflater.from(parent.context) .inflate(R.layout.view_archive_item, parent, false)
         return ArchiveViewHolder(view)
+    }
+
+    fun filterList(filterlist: ArrayList<SibillaDatabase>) {
+        list = filterlist
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ArchiveViewHolder, position: Int) {
@@ -26,6 +31,8 @@ class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ArchiveViewHolder>(){
     }
 
     override fun getItemCount() = list.size
+
+
 
     fun setData(data : List<SibillaDatabase>){
         list.apply {

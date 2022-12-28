@@ -3,12 +3,16 @@ package com.example.insightfuture.archive
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.insightfuture.ArchiveAdapter
+import com.example.insightfuture.R
 import com.example.insightfuture.databinding.ActivityArchiveBinding
 import com.example.insightfuture.roomDatabase.SibillaDatabase
 import com.example.roomdatabase.AppDatabase
@@ -17,41 +21,36 @@ import kotlinx.coroutines.launch
 
 class ArchiveActivity : AppCompatActivity() {
 
-    private lateinit var appDB : AppDatabase
-    private lateinit var binding : ActivityArchiveBinding
-    private lateinit var backBtn : Button
-    private lateinit var searchBtn : Button
+    private lateinit var appDB: AppDatabase
+    private lateinit var binding: ActivityArchiveBinding
+    private lateinit var backBtn: Button
+    private lateinit var searchBtn: Button
     private lateinit var searchText: EditText
+
+    private lateinit var sibillaList: ArrayList<SibillaDatabase>
+    lateinit var arcAdapter: ArchiveAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_archive)
+        // setContentView(R.layout.activity_archive)
         binding = ActivityArchiveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sibillaList = ArrayList()
+
         backBtn = binding.backBtn
-        searchBtn = binding.searchBtn
-        searchText = binding.searchBar
+        // searchBtn = binding.searchBtn
+        // searchText = binding.searchBar
         appDB = AppDatabase.invoke(this)
 
-        backBtn.setOnClickListener{
+        backBtn.setOnClickListener {
             finish()
         }
 
-        searchBtn.setOnClickListener {
-
-           /* val searchQuery = searchText.text.toString().toLowerCase()
-
-            if(searchQuery.isNotEmpty()){
-               readData(searchQuery)
-            }
-
-            */
-
-            readData()
-
-        }
+        // searchBtn.setOnClickListener {
+        // readData()
+        // }
 
     }
 
@@ -71,10 +70,63 @@ class ArchiveActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+
+        inflater.inflate(R.menu.search_menu, menu)
+
+        val searchItem: MenuItem = menu.findItem(R.id.actionSearch)
+        val searchView: SearchView = searchItem.getActionView() as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                filter(msg)
+                return false
+            }
+        })
+
+        return true
+    }
+
+    private fun filter(text: String) {
+        val filteredlist: ArrayList<SibillaDatabase> = ArrayList()
+
+      /*  lateinit var sibillaDb : SibillaDatabase
+
+        GlobalScope.launch {
+              sibillaDb = appDB.sibillaDao().findByQuery(text)
+              //Log.d("Sibilla", sibillaDb.toString())
+
+            //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+            //  displayData(sibilla)
+        } */
+
+        for (item in sibillaList) {
+
+           if (item.name?.toLowerCase()!!.contains(text.toLowerCase())) {
+               Toast.makeText(this, "Data Found..", Toast.LENGTH_SHORT).show()
+                filteredlist.add(item)
+           }
+        }
+
+        if (filteredlist.isEmpty()) {
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            arcAdapter.filterList(filteredlist)
+        }
+    }
+
+
+}
+
 
 
 /* private suspend fun displayData(student: Student){
-  /*
  ithContext(Dispatchers.Main){
        binding.tvFirstName.text = student.firstName
        binding.tvLastName.text = student.lastName
@@ -83,27 +135,27 @@ class ArchiveActivity : AppCompatActivity() {
 
 } */
 
- */
 
 
-private fun readData( /*   searchQuery: String  */) {
 
-    val searchQuery = binding.searchBar.text.toString().toLowerCase()
 
-    if(searchQuery.isNotEmpty()){
-        lateinit var sibilla : SibillaDatabase
 
-        GlobalScope.launch {
-            sibilla = appDB.sibillaDao().findByQuery(searchQuery)
-            //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
-            //  displayData(sibilla)
-        }
+// private fun readData(  searchQuery: String  ) {
 
-       // binding.searchBar.text.clear()
+   //val searchQuery = binding.searchBar.text.toString().toLowerCase()
 
-    }
+  // if(searchQuery.isNotEmpty()){
+   //    lateinit var sibilla : SibillaDatabase
 
-    }
+     //  GlobalScope.launch {
+      //     sibilla = appDB.sibillaDao().findByQuery(searchQuery)
+           //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+           //  displayData(sibilla)
+     //  }
 
-}
+      // binding.searchBar.text.clear()
+
+   // }
+
+
 

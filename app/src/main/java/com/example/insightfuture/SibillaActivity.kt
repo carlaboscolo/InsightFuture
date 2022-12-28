@@ -26,7 +26,7 @@ class SibillaActivity : AppCompatActivity() {
 
     private lateinit var appDB : AppDatabase
     private lateinit var writeDataBtn : Button
-    private lateinit var archiveBtn : Button
+    private lateinit var mainBtn : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +38,7 @@ class SibillaActivity : AppCompatActivity() {
         appDB = AppDatabase.invoke(this)
         writeDataBtn = binding.saveBtn
         sibillaResponse = binding.sibillaResponse
-        archiveBtn = binding.archiBtn
+        mainBtn = binding.archiBtn
 
         var str1pos1 = intent.getStringExtra("str1pos1")
         var str2pos1 =  intent.getStringExtra("str2pos1")
@@ -59,7 +59,7 @@ class SibillaActivity : AppCompatActivity() {
             writeData(receivedObject)
         }
 
-        archiveBtn.setOnClickListener {
+        mainBtn.setOnClickListener {
             launchArchive()
         }
 
@@ -100,7 +100,7 @@ class SibillaActivity : AppCompatActivity() {
     }
 
     private fun launchArchive() {
-        val intent = Intent(this, ArchiveActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

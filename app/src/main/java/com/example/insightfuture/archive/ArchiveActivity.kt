@@ -49,14 +49,6 @@ class ArchiveActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // below line is to get our inflater
-        val inflater = menuInflater
 
-        // inside inflater we are inflating our menu file.
-        inflater.inflate(R.menu.menu_item, menu)
-
-        return true
-    }
 
 }

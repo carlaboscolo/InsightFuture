@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.insightfuture.roomDatabase.SibillaDatabase
 
 
-class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ArchiveViewHolder>(){
-    private var list = mutableListOf<SibillaDatabase>()
+class ArchiveAdapter(private var list: ArrayList<SibillaDatabase>,
+)  : RecyclerView.Adapter<ArchiveAdapter.ArchiveViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): ArchiveViewHolder{
-        val view = LayoutInflater.from(parent.context) .inflate(R.layout.view_archive_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_archive_item, parent, false)
         return ArchiveViewHolder(view)
     }
 
@@ -23,22 +23,14 @@ class ArchiveAdapter : RecyclerView.Adapter<ArchiveAdapter.ArchiveViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ArchiveViewHolder, position: Int) {
-        val archive = list[position]
-        holder.data.text = archive.data
-        val stringQuestion = archive.question + " " + archive.name + " " + archive.surname + " " + archive.bornPlace
+        val stringQuestion =  list.get(position).question + " " +  list.get(position).name + " " +  list.get(position).surname + " " +  list.get(position).bornPlace
+        holder.data.text =  list.get(position).data
         holder.question.text = stringQuestion
-        holder.response.text = archive.response
+        holder.response.text = list.get(position).response
     }
 
-    override fun getItemCount() = list.size
-
-
-
-    fun setData(data : List<SibillaDatabase>){
-        list.apply {
-            clear()
-            addAll(data)
-        }
+    override fun getItemCount(): Int {
+        return list.size
     }
 
     class ArchiveViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

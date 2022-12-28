@@ -2,11 +2,9 @@ package com.example.insightfuture.archive
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
@@ -16,20 +14,18 @@ import com.example.insightfuture.R
 import com.example.insightfuture.databinding.ActivityArchiveBinding
 import com.example.insightfuture.roomDatabase.SibillaDatabase
 import com.example.roomdatabase.AppDatabase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ArchiveActivity : AppCompatActivity() {
 
     private lateinit var appDB: AppDatabase
     private lateinit var binding: ActivityArchiveBinding
     private lateinit var backBtn: Button
-    private lateinit var searchBtn: Button
-    private lateinit var searchText: EditText
 
-    private lateinit var sibillaList: ArrayList<SibillaDatabase>
-    lateinit var arcAdapter: ArchiveAdapter
-
+    private lateinit var arcAdapter: ArchiveAdapter
+    private lateinit var archiveList: ArrayList<SibillaDatabase>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,37 +33,27 @@ class ArchiveActivity : AppCompatActivity() {
         binding = ActivityArchiveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sibillaList = ArrayList()
+       archiveList = ArrayList()
+        arcAdapter = ArchiveAdapter(archiveList)
 
         backBtn = binding.backBtn
-        // searchBtn = binding.searchBtn
-        // searchText = binding.searchBar
         appDB = AppDatabase.invoke(this)
 
         backBtn.setOnClickListener {
             finish()
         }
 
-        // searchBtn.setOnClickListener {
-        // readData()
-        // }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
 
         lifecycleScope.launch {
-            val archiveList = AppDatabase(this@ArchiveActivity).sibillaDao().getAll()
+            archiveList = AppDatabase(this@ArchiveActivity).sibillaDao().getAll() as ArrayList<SibillaDatabase>
 
             binding.recyclerView.apply {
                 layoutManager = LinearLayoutManager(this@ArchiveActivity)
-                adapter = ArchiveAdapter().apply {
-                    setData(archiveList)
-                }
+                adapter = ArchiveAdapter(archiveList)
             }
-
         }
+
+        arcAdapter.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,36 +79,34 @@ class ArchiveActivity : AppCompatActivity() {
         return true
     }
 
-    private fun filter(text: String) {
+     private fun filter(text: String) {
         val filteredlist: ArrayList<SibillaDatabase> = ArrayList()
 
-      /*  lateinit var sibillaDb : SibillaDatabase
+    /*   lateinit var sibillaDb : SibillaDatabase
 
         GlobalScope.launch {
               sibillaDb = appDB.sibillaDao().findByQuery(text)
-              //Log.d("Sibilla", sibillaDb.toString())
-
+           //   Log.d("searchquery", "sono entrato qui")
             //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
             //  displayData(sibilla)
         } */
 
-        for (item in sibillaList) {
-
-           if (item.name?.toLowerCase()!!.contains(text.toLowerCase())) {
+       for (item in archiveList) {
+           if (item.name?.toLowerCase(Locale.ROOT)?.contains(text.toLowerCase()) == true) {
                Toast.makeText(this, "Data Found..", Toast.LENGTH_SHORT).show()
-                filteredlist.add(item)
+               filteredlist.add(item)
            }
         }
 
         if (filteredlist.isEmpty()) {
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
-            arcAdapter.filterList(filteredlist)
+           arcAdapter.filterList(filteredlist)
         }
     }
-
-
 }
+
+
 
 
 
@@ -136,26 +120,22 @@ class ArchiveActivity : AppCompatActivity() {
 } */
 
 
+  /*  private fun readData(searchQuery: String) {
 
+        //val searchQuery = binding.searchBar.text.toString().toLowerCase()
 
+        if (searchQuery.isNotEmpty()) {
+            lateinit var sibilla: SibillaDatabase
 
+            GlobalScope.launch {
+                sibilla = appDB.sibillaDao().findByQuery(searchQuery)
+                Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+                //  displayData(sibilla)
+            }
 
-// private fun readData(  searchQuery: String  ) {
+            // binding.searchBar.text.clear()
 
-   //val searchQuery = binding.searchBar.text.toString().toLowerCase()
+        }
 
-  // if(searchQuery.isNotEmpty()){
-   //    lateinit var sibilla : SibillaDatabase
-
-     //  GlobalScope.launch {
-      //     sibilla = appDB.sibillaDao().findByQuery(searchQuery)
-           //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
-           //  displayData(sibilla)
-     //  }
-
-      // binding.searchBar.text.clear()
-
-   // }
-
-
+    } */
 

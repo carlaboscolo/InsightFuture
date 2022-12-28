@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.insightfuture.ArchiveAdapter
@@ -21,6 +22,7 @@ class ArchiveActivity : AppCompatActivity() {
     private lateinit var backBtn : Button
     private lateinit var searchBtn : Button
     private lateinit var searchText: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +95,7 @@ private fun readData( /*   searchQuery: String  */) {
 
         GlobalScope.launch {
             sibilla = appDB.sibillaDao().findByQuery(searchQuery)
-            Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+            //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
             //  displayData(sibilla)
         }
 
@@ -101,6 +103,7 @@ private fun readData( /*   searchQuery: String  */) {
 
     }
 
-}
+    }
 
 }
+

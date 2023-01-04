@@ -27,6 +27,7 @@ class ArchiveActivity : AppCompatActivity() {
     private lateinit var arcAdapter: ArchiveAdapter
     private lateinit var archiveList: ArrayList<SibillaDatabase>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_archive)

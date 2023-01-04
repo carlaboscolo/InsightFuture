@@ -1,6 +1,7 @@
 package com.example.insightfuture.roomDatabase
 
 import androidx.room.*
+import java.text.FieldPosition
 
 @Dao
 interface SibillaDao {
@@ -15,9 +16,13 @@ interface SibillaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(sibilla: SibillaDatabase)
 
-   /* @Delete
+    @Delete
     suspend fun delete(sibilla : SibillaDatabase)
 
+    @Query("DELETE FROM sibilla_table WHERE id LIKE :id")
+    suspend fun deleteItem(id: Int?)
+
+   /*
     @Query("DELETE FROM sibilla_table")
     suspend fun deleteAll()
 

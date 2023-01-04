@@ -22,5 +22,6 @@
     <string name="responso">Responso</string>
     <string name="domanda">Domanda</string>
     <string name="cerca">Cerca</string>
+    <string name="titolo">Titolo</string>
 
 </resources>

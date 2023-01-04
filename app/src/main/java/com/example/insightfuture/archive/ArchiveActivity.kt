@@ -1,11 +1,12 @@
 package com.example.insightfuture.archive
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.ActionBar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +17,6 @@ import com.example.insightfuture.roomDatabase.SibillaDatabase
 import com.example.roomdatabase.AppDatabase
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ArchiveActivity : AppCompatActivity() {
 
@@ -44,7 +44,6 @@ class ArchiveActivity : AppCompatActivity() {
             finish()
         }
 
-
         lifecycleScope.launch {
             archiveList = AppDatabase(this@ArchiveActivity).sibillaDao().getAll() as ArrayList<SibillaDatabase>
 
@@ -57,9 +56,9 @@ class ArchiveActivity : AppCompatActivity() {
         arcAdapter.notifyDataSetChanged()
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-
         inflater.inflate(R.menu.search_menu, menu)
 
         val searchItem: MenuItem = menu.findItem(R.id.actionSearch)
@@ -83,7 +82,8 @@ class ArchiveActivity : AppCompatActivity() {
      private fun filter(text: String) {
         val filteredlist: ArrayList<SibillaDatabase> = ArrayList()
 
-    /*   lateinit var sibillaDb : SibillaDatabase
+    /*  non funziona
+     lateinit var sibillaDb : SibillaDatabase
 
         GlobalScope.launch {
               sibillaDb = appDB.sibillaDao().findByQuery(text)
@@ -111,6 +111,7 @@ class ArchiveActivity : AppCompatActivity() {
 
 
 
+//non va
 /* private suspend fun displayData(student: Student){
  ithContext(Dispatchers.Main){
        binding.tvFirstName.text = student.firstName

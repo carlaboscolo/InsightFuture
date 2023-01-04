@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--item for our search view with its id-->
     <item
         android:id="@+id/actionSearch"
+        android:enabled="true"
+        android:iconTint="@color/black"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/cerca"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
+
 
 </menu>

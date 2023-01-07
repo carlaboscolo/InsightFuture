@@ -14,7 +14,6 @@ import com.example.insightfuture.model.User
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var auth: FirebaseAuth
-
     private lateinit var analytics: FirebaseAnalytics
 
     private lateinit var question : EditText
@@ -109,7 +107,6 @@ class MainActivity : AppCompatActivity() {
 
         //firebase
         auth = FirebaseAuth.getInstance()
-        analytics = Firebase.analytics
 
         //toolbar
         val display = supportActionBar
@@ -134,6 +131,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("checkLog", "Non sei loggato")
         }else{
            Log.d("checkLog", "Sei loggato")
+           analytics = Firebase.analytics
         }
 
 

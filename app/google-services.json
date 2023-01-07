@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "431345295673",
+    "project_id": "insightfuture-login",
+    "storage_bucket": "insightfuture-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431345295673:android:334017ddb3d7bb05fd48e8",
+        "android_client_info": {
+          "package_name": "com.example.insightfuture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431345295673-96pq6te9ogk70rvche9uf282mvbeep0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzuxwdVT7aaIb7eS-XKmkY0a4JaeVZVlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431345295673-96pq6te9ogk70rvche9uf282mvbeep0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

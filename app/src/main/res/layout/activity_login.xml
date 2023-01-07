@@ -59,7 +59,7 @@
         android:text="@string/login"
         android:layout_marginTop="10dp" />
 
-    <!--
+
     <com.developer.gbuttons.GoogleSignInButton
         android:id="@+id/googleBtn"
         android:layout_width="match_parent"
@@ -72,7 +72,7 @@
         app:isDarkTheme = "true"
         android:padding="8dp"
         />
-        -->
+
 
     <TextView
         android:id="@+id/registerNow"

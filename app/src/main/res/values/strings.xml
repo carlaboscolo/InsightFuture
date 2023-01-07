@@ -31,4 +31,5 @@
     <string name="logout">Logout</string>
     <string name="inserisci_di_nuovo_la_password">Inserisci di nuovo la password</string>
     <string name="clicca_per_loggare">Hai già un account? Clicca qui </string>
+    <string name="sign_in_with_google">Loggati con Google</string>
 </resources>

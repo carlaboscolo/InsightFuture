@@ -2,13 +2,14 @@ package com.example.insightfuture
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import com.example.insightfuture.databinding.ActivityStoryBinding
 
 class StoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStoryBinding
-    private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,12 +17,29 @@ class StoryActivity : AppCompatActivity() {
         binding = ActivityStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        backBtn = binding.backBtn
+        //toolbar
+        val display = supportActionBar
+        display?.title = "La Storia"
+        display?.setDisplayHomeAsUpEnabled(true)
 
-        backBtn.setOnClickListener {
-            finish()
+
+    }
+
+    //toolbar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-
 
     }
 }

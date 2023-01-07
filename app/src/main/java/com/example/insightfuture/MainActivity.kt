@@ -3,11 +3,12 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import com.example.insightfuture.databinding.ActivityMainBinding
 import android.content.Intent
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.model.User
 import org.json.JSONArray
@@ -17,8 +18,6 @@ import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
-
-    var alertDialog: AlertDialog? = null
 
     private lateinit var binding: ActivityMainBinding
 
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private var str2pos2 by Delegates.notNull<String>()
     private var str1pos3 by Delegates.notNull<String>()
     private var str2pos3 by Delegates.notNull<String>()
-
 
     private val KeyLetters = mapOf(
         "k" to 0,
@@ -71,6 +69,19 @@ class MainActivity : AppCompatActivity() {
         "b" to 9,
     )
 
+    //senza login
+    private lateinit var questionText : String
+
+    private lateinit var parentSp : Spinner
+    private lateinit var childSp : Spinner
+
+    private lateinit var arraylistParent : ArrayList<String>
+    private lateinit var arrayAdapter : ArrayAdapter<String>
+
+    private lateinit var arrayAmore : ArrayList<String>
+    private lateinit var arrayLavoro : ArrayList<String>
+    private lateinit var arrayFamiglia : ArrayList<String>
+    private lateinit var arrayAdapterChild : ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,16 +95,86 @@ class MainActivity : AppCompatActivity() {
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
 
+        //toolbar
+        val display = supportActionBar
+        display?.title = "Interroga la Sibilla"
+        display?.setDisplayHomeAsUpEnabled(true)
 
-       // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
+        //ricordarsi di mettere visibility se c'è il login
+
+        //senza login
+        parentSp = binding.spParent
+        childSp = binding.spChild
+
+        arraylistParent = ArrayList<String>()
+        arraylistParent.add("Amore")
+        arraylistParent.add("Lavoro")
+        arraylistParent.add("Famiglia")
+
+        arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.select_dialog_item, arraylistParent)
+
+        parentSp.setAdapter(arrayAdapter)
+
+        //child
+        arrayAmore = ArrayList<String>()
+        arrayAmore.add("Sarò fortunato/a in amore quest’anno ?")
+        arrayAmore.add("Come sarà la mia prossima relazione ?")
+
+        arrayLavoro = ArrayList<String>()
+        arrayLavoro.add("Come posso affrontare le opportunità lavorative che mi attendono ?")
+        arrayLavoro.add("Come posso raggiungere il lavoro dei miei sogni ?")
+
+        arrayFamiglia = ArrayList<String>()
+        arrayFamiglia.add("Come posso andare d’accordo con i miei genitori ?")
+        arrayFamiglia.add("Cosa devo fare per avvicinarmi di più a mio figlio ?")
+
+        //process
+        arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
+        childSp.setAdapter(arrayAdapterChild)
+
+        parentSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent : AdapterView<*>?, view : View?, position: Int, id : Long){
+                if(position == 0){
+                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
+                    childSp.setAdapter(arrayAdapterChild)
+                }else if(position == 1){
+                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayLavoro)
+                    childSp.setAdapter(arrayAdapterChild)
+                } else if(position == 2){
+                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayFamiglia)
+                    childSp.setAdapter(arrayAdapterChild)
+                }
+
+            }
+        }
+
+        childSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+               questionText = parent?.getItemAtPosition(position).toString()
+                Log.d("scelta", questionText)
+            }
+        }
+
+       //fine senza login
+
+
+
+
+        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener {
-
-            //var questionReplace =  question.text.toString().toLowerCase().replace("[-\\[\\]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "")
-            // Log.d("question", questionReplace)
-
-            val questionUser = question.text.toString().toLowerCase()
+           //domanda senza login
+            val questionUser = questionText.toString().toLowerCase()
                 .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+
+            //domanda base scritta da utente
+            // val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             val nameUser = name.text.toString().toLowerCase()
                 .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             val surnameUser = surname.text.toString().toLowerCase()
@@ -249,22 +330,6 @@ class MainActivity : AppCompatActivity() {
 
         var arrFirstLetter = arrayOf<String>()
 
-     /*   var arrMuta = mutableListOf<String>(*arr)
-
-
-        for (i in arrMuta.indices){
-            if(arrMuta[i] == ""){
-
-                Log.d("progame", "sono entrato nel drop" + arr[i] + "1")
-                arrMuta.removeAt(i)
-
-                if(arrMuta[i] == "") {
-                    Log.d("progame", "sono entrato nel drop DROPPPP" + arrMuta[i] + "2")
-                }
-            }
-        }
-      */
-
         for (i in arr.indices) {
             if(arr[i] != "") {
                 arrFirstLetter += arrayOf(arr[i].substring(0, 1))
@@ -303,6 +368,24 @@ class MainActivity : AppCompatActivity() {
             Log.d("Sum", somma.toString())
             return somma.toInt()
         }
+
+    //toolbar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
 }
 
 private fun String.Normalize(): String {

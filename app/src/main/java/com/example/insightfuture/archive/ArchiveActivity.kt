@@ -22,7 +22,6 @@ class ArchiveActivity : AppCompatActivity() {
 
     private lateinit var appDB: AppDatabase
     private lateinit var binding: ActivityArchiveBinding
-    private lateinit var backBtn: Button
 
     private lateinit var arcAdapter: ArchiveAdapter
     private lateinit var archiveList: ArrayList<SibillaDatabase>
@@ -34,15 +33,15 @@ class ArchiveActivity : AppCompatActivity() {
         binding = ActivityArchiveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //toolbar
+        val display = supportActionBar
+        display?.title = "Archivio"
+        display?.setDisplayHomeAsUpEnabled(true)
+
         archiveList = ArrayList()
         arcAdapter = ArchiveAdapter(archiveList)
 
-        backBtn = binding.backBtn
         appDB = AppDatabase.invoke(this)
-
-        backBtn.setOnClickListener {
-            finish()
-        }
 
         lifecycleScope.launch {
             archiveList = AppDatabase(this@ArchiveActivity).sibillaDao()
@@ -58,6 +57,7 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
 
+    //toolbar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.search_menu, menu)
@@ -78,6 +78,17 @@ class ArchiveActivity : AppCompatActivity() {
         })
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun filter(text: String) {
@@ -107,6 +118,8 @@ class ArchiveActivity : AppCompatActivity() {
             arcAdapter.filterList(filteredlist)
         }
     }
+
+
 }
 
 

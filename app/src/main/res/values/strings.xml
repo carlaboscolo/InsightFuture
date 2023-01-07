@@ -23,5 +23,7 @@
     <string name="domanda">Domanda</string>
     <string name="cerca">Cerca</string>
     <string name="titolo">Titolo</string>
+    <string name="child"> Scegli una domanda </string>
+    <string name="parent">Scegli una categoria </string>
 
 </resources>

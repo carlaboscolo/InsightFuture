@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -34,6 +36,11 @@ class SibillaActivity : AppCompatActivity() {
         // setContentView(R.layout.activity_sibilla)
         binding = ActivitySibillaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //toolbar
+        val display = supportActionBar
+        display?.title = "Il responso della Sibilla"
+        display?.setDisplayHomeAsUpEnabled(true)
 
         appDB = AppDatabase.invoke(this)
         writeDataBtn = binding.saveBtn
@@ -111,4 +118,20 @@ class SibillaActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    //toolbar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }

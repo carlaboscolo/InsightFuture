@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="40dp"
     tools:context=".MainActivity">
 
 
@@ -15,11 +15,40 @@
         android:layout_height="250px"
         android:background="@color/white"
         android:hint="@string/question"
-        android:paddingLeft="40px"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:visibility="gone"
         />
+
+    <TextView
+        android:id="@+id/tv_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parent"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/sp_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/tv_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/child"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/sp_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        />
+
 
     <EditText
         android:id="@+id/name"
@@ -27,7 +56,17 @@
         android:layout_height="150px"
         android:background="@color/white"
         android:hint="@string/name"
-        android:paddingLeft="40px"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/surname"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:background="@color/white"
+        android:hint="@string/surname"
         android:textColor="@color/black"
         android:textSize="20sp"
         />
@@ -39,21 +78,11 @@
         android:layout_marginStart="4dp"
         android:background="@color/white"
         android:hint="@string/bornPlace"
-        android:paddingLeft="40px"
         android:textColor="@color/black"
         android:textSize="20sp"
         />
 
-    <EditText
-        android:id="@+id/surname"
-        android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:background="@color/white"
-        android:hint="@string/surname"
-        android:paddingLeft="40px"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-       />
+
 
     <Button
         android:id="@+id/searchBtn"
@@ -61,6 +90,7 @@
         android:layout_height="150px"
         android:text="@string/search"
         android:layout_gravity="center"
+        android:layout_marginTop="20dp"
        />
 
 

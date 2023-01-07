@@ -9,8 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.example.insightfuture.Login.Login
+import com.example.insightfuture.login.LoginActivity
 import com.example.insightfuture.model.User
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONArray
 import java.io.Serializable
 import java.text.Normalizer
@@ -327,7 +328,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchLogin() {
-        val intent = Intent(this, Login::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
@@ -394,6 +395,11 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId){
             android.R.id.home -> {
                 finish()
+                true
+            }
+            R.id.logout -> {
+                FirebaseAuth.getInstance().signOut()
+                Log.d("logout", "logout clicked")
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -8,5 +8,11 @@
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/impostazioni" />
 
+    <item
+        android:id="@+id/logout"
+        android:enabled="true"
+        android:iconTint="@color/black"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/logout" />
 
 </menu>

@@ -1,6 +1,7 @@
 package com.example.insightfuture.login
 
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -10,12 +11,21 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.developer.gbuttons.GoogleSignInButton
 import com.example.insightfuture.MainActivity
+import com.example.insightfuture.R
 import com.example.insightfuture.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,11 +39,10 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    /*
       private lateinit var googleBtn : GoogleSignInButton
       private lateinit var gOptions : GoogleSignInOptions
       private lateinit var gClient : GoogleSignInClient
-  */
+
 
     public override fun onStart() {
         super.onStart()
@@ -56,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         login_btn = binding.btnLogin
         progressBar = binding.progressBar
         registerNow = binding.registerNow
-        //googleBtn = binding.googleBtn
+        googleBtn = binding.googleBtn
 
         registerNow.setOnClickListener{
             launchRegister()
@@ -105,8 +114,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //integrazione google
-
-    /*    gOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
@@ -115,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
         googleBtn.setOnClickListener {
             signInGoogle()
         }
-        */
+
 
 
     }
@@ -132,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
        // finish()
     }
 
-/*
+  //integrazione google
     private fun signInGoogle(){
         val signInIntent = gClient.signInIntent
         launcher.launch(signInIntent)
@@ -172,6 +180,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-    } */
+    }
 
 }

@@ -85,8 +85,6 @@ class MainActivity : AppCompatActivity() {
         searchBtn = binding.searchBtn
 
 
-
-
        // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener {

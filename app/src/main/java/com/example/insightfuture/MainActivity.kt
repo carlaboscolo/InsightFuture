@@ -305,22 +305,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("Sum", somma.toString())
             return somma.toInt()
         }
-
-
-
-    private fun createDialog() {
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Errore")
-        alertDialogBuilder.setMessage("Inserisci tutti i campi")
-        alertDialogBuilder.setPositiveButton("Ok") { _: DialogInterface, _: Int ->
-            finish()
-        }
-        alertDialogBuilder.setNegativeButton("No", { dialogInterface: DialogInterface, i: Int -> })
-
-        alertDialog = alertDialogBuilder.create()
-    }
-
-
 }
 
 private fun String.Normalize(): String {

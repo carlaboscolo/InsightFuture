@@ -93,5 +93,21 @@
         android:layout_marginTop="20dp"
        />
 
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/vuoi_interrogare_la_sibilla_senza_limiti"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/loginPageBtn"
+        android:layout_width="300px"
+        android:layout_height="150px"
+        android:text="@string/login"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        />
 
 </LinearLayout>

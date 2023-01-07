@@ -25,5 +25,7 @@
     <string name="titolo">Titolo</string>
     <string name="child"> Scegli una domanda </string>
     <string name="parent">Scegli una categoria </string>
+    <string name="vuoi_interrogare_la_sibilla_senza_limiti">Vuoi interrogare la Sibilla senza limiti?</string>
+    <string name="impostazioni">Impostazioni</string>
 
 </resources>

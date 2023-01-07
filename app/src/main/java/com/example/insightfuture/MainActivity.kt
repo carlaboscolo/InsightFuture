@@ -1,5 +1,4 @@
 package com.example.insightfuture
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.insightfuture.Login.Login
 import com.example.insightfuture.model.User
 import org.json.JSONArray
 import java.io.Serializable
@@ -83,6 +83,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var arrayFamiglia : ArrayList<String>
     private lateinit var arrayAdapterChild : ArrayAdapter<String>
 
+    private lateinit var loginPageBtn : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
@@ -101,6 +103,13 @@ class MainActivity : AppCompatActivity() {
         display?.setDisplayHomeAsUpEnabled(true)
 
         //ricordarsi di mettere visibility se c'è il login
+
+        loginPageBtn = binding.loginPageBtn
+
+        loginPageBtn.setOnClickListener {
+           launchLogin()
+        }
+
 
         //senza login
         parentSp = binding.spParent
@@ -301,7 +310,7 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-        }
+          }
         }
 
    //funzione che lancia la schermata con il responso della Sibilla
@@ -314,6 +323,11 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("str1pos3", str1pos3)
         intent.putExtra("str2pos3", str2pos3)
         intent.putExtra("Obj",user as Serializable)
+        startActivity(intent)
+    }
+
+    private fun launchLogin() {
+        val intent = Intent(this, Login::class.java)
         startActivity(intent)
     }
 

@@ -9,16 +9,16 @@ import com.example.insightfuture.databinding.ActivityMenuBinding
 
 class MenuActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMenuBinding
+    private lateinit var binding: ActivityMenuBinding
 
-    private lateinit var questionSibBtn : Button
-    private lateinit var storyBtn : Button
-    private lateinit var archiveBtn : Button
-    private lateinit var packageBtn : Button
+    private lateinit var questionSibBtn: Button
+    private lateinit var storyBtn: Button
+    private lateinit var archiveBtn: Button
+    private lateinit var packageBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_menu)
+        // setContentView(R.layout.activity_menu)
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,7 +27,7 @@ class MenuActivity : AppCompatActivity() {
         archiveBtn = binding.archiveBtn
         packageBtn = binding.packageBtn
 
-        questionSibBtn.setOnClickListener{
+        questionSibBtn.setOnClickListener {
             launchSibilla()
         }
 
@@ -39,10 +39,9 @@ class MenuActivity : AppCompatActivity() {
             launchArchive()
         }
 
-        packageBtn.setOnClickListener{
+        packageBtn.setOnClickListener {
             launchPackage()
         }
-
 
 
     }

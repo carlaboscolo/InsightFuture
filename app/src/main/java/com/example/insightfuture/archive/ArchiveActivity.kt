@@ -34,7 +34,7 @@ class ArchiveActivity : AppCompatActivity() {
         binding = ActivityArchiveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       archiveList = ArrayList()
+        archiveList = ArrayList()
         arcAdapter = ArchiveAdapter(archiveList)
 
         backBtn = binding.backBtn
@@ -45,7 +45,8 @@ class ArchiveActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            archiveList = AppDatabase(this@ArchiveActivity).sibillaDao().getAll() as ArrayList<SibillaDatabase>
+            archiveList = AppDatabase(this@ArchiveActivity).sibillaDao()
+                .getAll() as ArrayList<SibillaDatabase>
 
             binding.recyclerView.apply {
                 layoutManager = LinearLayoutManager(this@ArchiveActivity)
@@ -79,39 +80,37 @@ class ArchiveActivity : AppCompatActivity() {
         return true
     }
 
-     private fun filter(text: String) {
+    private fun filter(text: String) {
         val filteredlist: ArrayList<SibillaDatabase> = ArrayList()
 
-    /*  non funziona
-     lateinit var sibillaDb : SibillaDatabase
+        /*  ----------- non funziona -------------------------
+           lateinit var sibillaDb : SibillaDatabase
 
-        GlobalScope.launch {
-              sibillaDb = appDB.sibillaDao().findByQuery(text)
-           //   Log.d("searchquery", "sono entrato qui")
-            //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
-            //  displayData(sibilla)
-        } */
+          GlobalScope.launch {
+                sibillaDb = appDB.sibillaDao().findByQuery(text)
+             //   Log.d("searchquery", "sono entrato qui")
+              //Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+              //  displayData(sibilla)
+          }
+          --------------------------------------------------- */
 
-       for (item in archiveList) {
-           if (item.name?.toLowerCase(Locale.ROOT)?.contains(text.toLowerCase()) == true) {
-               Toast.makeText(this, "Data Found..", Toast.LENGTH_SHORT).show()
-               filteredlist.add(item)
-           }
+        for (item in archiveList) {
+            if (item.name?.toLowerCase(Locale.ROOT)?.contains(text.toLowerCase()) == true) {
+                Toast.makeText(this, "Data Found..", Toast.LENGTH_SHORT).show()
+                filteredlist.add(item)
+            }
         }
 
         if (filteredlist.isEmpty()) {
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
-           arcAdapter.filterList(filteredlist)
+            arcAdapter.filterList(filteredlist)
         }
     }
 }
 
 
-
-
-
-//non va
+// ------------------------  NON FUNZIONA -----------------------------
 /* private suspend fun displayData(student: Student){
  ithContext(Dispatchers.Main){
        binding.tvFirstName.text = student.firstName
@@ -122,22 +121,22 @@ class ArchiveActivity : AppCompatActivity() {
 } */
 
 
-  /*  private fun readData(searchQuery: String) {
+/*  private fun readData(searchQuery: String) {
 
-        //val searchQuery = binding.searchBar.text.toString().toLowerCase()
+      //val searchQuery = binding.searchBar.text.toString().toLowerCase()
 
-        if (searchQuery.isNotEmpty()) {
-            lateinit var sibilla: SibillaDatabase
+      if (searchQuery.isNotEmpty()) {
+          lateinit var sibilla: SibillaDatabase
 
-            GlobalScope.launch {
-                sibilla = appDB.sibillaDao().findByQuery(searchQuery)
-                Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
-                //  displayData(sibilla)
-            }
+          GlobalScope.launch {
+              sibilla = appDB.sibillaDao().findByQuery(searchQuery)
+              Log.d("sibillaTextQuery", searchQuery + " "  + sibilla.question)
+              //  displayData(sibilla)
+          }
 
-            // binding.searchBar.text.clear()
+          // binding.searchBar.text.clear()
 
-        }
+      }
 
-    } */
+} */
 

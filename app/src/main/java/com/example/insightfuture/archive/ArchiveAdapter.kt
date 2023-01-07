@@ -36,11 +36,13 @@ class ArchiveAdapter(private var list: ArrayList<SibillaDatabase>,
         holder.response.text = list.get(position).response
 
         holder.deleteBtn.setOnClickListener {
-            list.removeAt(position)
+         //   list.removeAt(position) funziona, ma non toglie da room database solo recycler
 
-          //  GlobalScope.launch {
-            //     appDB.sibillaDao().deleteItem(list.get(position).id)
-           // }
+          /*  ----------------- non funziona  ---------------------------
+          GlobalScope.launch {
+                appDB.sibillaDao().deleteItem(list.get(position).id)
+            }
+            -------------------------------------------------------------- */
 
             notifyDataSetChanged()
             Log.d("deletePosition", "ho cancellato l'elemento dalla lista "  +  list.get(position).id)

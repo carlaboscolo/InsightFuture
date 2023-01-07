@@ -7,8 +7,8 @@ import com.example.insightfuture.databinding.ActivityPackageBinding
 
 class PackageActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPackageBinding
-    private lateinit var backBtn : Button
+    private lateinit var binding: ActivityPackageBinding
+    private lateinit var backBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class PackageActivity : AppCompatActivity() {
 
         backBtn = binding.backBtn
 
-        backBtn.setOnClickListener{
+        backBtn.setOnClickListener {
             finish()
         }
 

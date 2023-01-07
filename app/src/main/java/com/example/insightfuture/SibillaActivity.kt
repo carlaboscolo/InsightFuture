@@ -22,16 +22,16 @@ class SibillaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySibillaBinding
 
-    private lateinit var sibillaResponse : TextView
+    private lateinit var sibillaResponse: TextView
 
-    private lateinit var appDB : AppDatabase
-    private lateinit var writeDataBtn : Button
-    private lateinit var archiveBtn : Button
+    private lateinit var appDB: AppDatabase
+    private lateinit var writeDataBtn: Button
+    private lateinit var archiveBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_sibilla)
+        // setContentView(R.layout.activity_sibilla)
         binding = ActivitySibillaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -41,15 +41,16 @@ class SibillaActivity : AppCompatActivity() {
         archiveBtn = binding.archiBtn
 
         var str1pos1 = intent.getStringExtra("str1pos1")
-        var str2pos1 =  intent.getStringExtra("str2pos1")
+        var str2pos1 = intent.getStringExtra("str2pos1")
         var str1pos2 = intent.getStringExtra("str1pos2")
-        var str2pos2 =  intent.getStringExtra("str2pos2")
+        var str2pos2 = intent.getStringExtra("str2pos2")
         var str1pos3 = intent.getStringExtra("str1pos3")
-        var str2pos3 =  intent.getStringExtra("str2pos3")
-        val receivedObject:User=intent?.getSerializableExtra("Obj") as User
+        var str2pos3 = intent.getStringExtra("str2pos3")
+        val receivedObject: User = intent?.getSerializableExtra("Obj") as User
         Log.d("userResponse", receivedObject.toString())
 
-        val sibResponse  =  str1pos1 + " " + str1pos2 + " " +  str1pos3 +  "\n" +  str2pos1 + " " + str2pos2 + " " + str2pos3
+        val sibResponse =
+            str1pos1 + " " + str1pos2 + " " + str1pos3 + "\n" + str2pos1 + " " + str2pos2 + " " + str2pos3
         sibillaResponse.text = sibResponse
 
         receivedObject.response = sibResponse
@@ -70,13 +71,19 @@ class SibillaActivity : AppCompatActivity() {
     private fun writeData(receivedObject: User) {
 
         val today = calendar()
-        //val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-        //val saveData: Date = dateFormat.parse(today)
         Log.d("saveData", "oggi " + today.toString())
 
-        val userData = SibillaDatabase(null,today, receivedObject.question,  receivedObject.name, receivedObject.surname, receivedObject.bornPlace, receivedObject.response )
+        val userData = SibillaDatabase(
+            null,
+            today,
+            receivedObject.question,
+            receivedObject.name,
+            receivedObject.surname,
+            receivedObject.bornPlace,
+            receivedObject.response
+        )
 
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             appDB.sibillaDao().insert(userData)
         }
 

@@ -7,14 +7,14 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    >
+   >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -33,17 +33,36 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_marginTop="10dp"
             android:hint="@string/password" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordCheck"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/inserisci_di_nuovo_la_password" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -52,30 +71,15 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="10dp" />
-
-    <!--
-    <com.developer.gbuttons.GoogleSignInButton
-        android:id="@+id/googleBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_in_with_google"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        app:isDarkTheme = "true"
-        android:padding="8dp"
-        />
-        -->
+        android:layout_marginTop="10dp"
+        android:text="@string/register" />
 
     <TextView
-        android:id="@+id/registerNow"
-        android:text="@string/clicca_per_registrarti"
+        android:id="@+id/loginNow"
+        android:text="@string/clicca_per_loggare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"

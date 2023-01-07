@@ -27,5 +27,8 @@
     <string name="parent">Scegli una categoria </string>
     <string name="vuoi_interrogare_la_sibilla_senza_limiti">Vuoi interrogare la Sibilla senza limiti?</string>
     <string name="impostazioni">Impostazioni</string>
-
+    <string name="clicca_per_registrarti">Non sei registrato? Clicca qui</string>
+    <string name="logout">Logout</string>
+    <string name="inserisci_di_nuovo_la_password">Inserisci di nuovo la password</string>
+    <string name="clicca_per_loggare">Hai già un account? Clicca qui </string>
 </resources>

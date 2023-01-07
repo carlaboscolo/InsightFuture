@@ -29,7 +29,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-   /* lancia activity dopo registrazione
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
@@ -37,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
             launchActivity()
         }
     }
-    */
 
 
 

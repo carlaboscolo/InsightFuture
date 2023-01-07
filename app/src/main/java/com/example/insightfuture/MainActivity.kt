@@ -11,7 +11,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.login.LoginActivity
 import com.example.insightfuture.model.User
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
 import java.io.Serializable
 import java.text.Normalizer
@@ -21,6 +26,10 @@ import kotlin.properties.Delegates
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var analytics: FirebaseAnalytics
 
     private lateinit var question : EditText
     private lateinit var name : EditText
@@ -98,12 +107,37 @@ class MainActivity : AppCompatActivity() {
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
 
+        //firebase
+        auth = FirebaseAuth.getInstance()
+        analytics = Firebase.analytics
+
         //toolbar
         val display = supportActionBar
         display?.title = "Interroga la Sibilla"
         display?.setDisplayHomeAsUpEnabled(true)
 
         //ricordarsi di mettere visibility se c'è il login
+
+        val user = Firebase.auth.currentUser
+        user?.let {
+            val name = user.displayName
+            val email = user.email
+            val photoUrl = user.photoUrl
+            val emailVerified = user.isEmailVerified
+            val uid = user.uid
+
+        }
+
+        //    user = auth.currentUser!!
+       if(user == null){
+           // launchLogin()
+            Log.d("checkLog", "Non sei loggato")
+        }else{
+           Log.d("checkLog", "Sei loggato")
+        }
+
+
+
 
         loginPageBtn = binding.loginPageBtn
 

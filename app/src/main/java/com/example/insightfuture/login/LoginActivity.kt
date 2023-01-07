@@ -131,13 +131,13 @@ class LoginActivity : AppCompatActivity() {
     private fun launchRegister() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
-        //finish()
+        finish()
     }
 
     private fun launchActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-       // finish()
+         finish()
     }
 
   //integrazione google

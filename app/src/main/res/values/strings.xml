@@ -32,9 +32,9 @@
     <string name="inserisci_di_nuovo_la_password">Inserisci di nuovo la password</string>
     <string name="clicca_per_loggare">Hai già un account? Clicca qui </string>
     <string name="sign_in_with_google">Loggati con Google</string>
-
     <string name="facebook_app_id">1234</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
+    <string name="loggati_con_facebook">Loggati con Facebook</string>
 
 </resources>

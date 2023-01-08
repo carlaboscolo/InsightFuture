@@ -7,8 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".login.LoginActivity"
-    >
+    tools:context=".login.LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -40,49 +39,58 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:layout_marginTop="10dp"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:text="@string/login" />
 
 
     <com.developer.gbuttons.GoogleSignInButton
         android:id="@+id/googleBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_with_google"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        app:isDarkTheme = "true"
         android:padding="8dp"
-        />
+        android:text="@string/sign_in_with_google"
+        app:isDarkTheme="true" />
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+         />
 
 
     <TextView
         android:id="@+id/registerNow"
-        android:text="@string/clicca_per_registrarti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:gravity="center"
         android:layout_marginTop="20dp"
-        />
+        android:gravity="center"
+        android:text="@string/clicca_per_registrarti"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.login.LoginActivity
 import com.example.insightfuture.model.User
+import com.facebook.FacebookSdk
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
@@ -119,9 +120,6 @@ class MainActivity : AppCompatActivity() {
         childSp = binding.spChild
         infoLogin = binding.info
 
-        //firebase
-        auth = FirebaseAuth.getInstance()
-
         //pulsante login
         loginPageBtn = binding.loginPageBtn
 
@@ -131,8 +129,11 @@ class MainActivity : AppCompatActivity() {
         display?.setDisplayHomeAsUpEnabled(true)
 
         //firebase
+        auth = FirebaseAuth.getInstance()
         val user = Firebase.auth.currentUser
         analytics = Firebase.analytics
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
        if(user == null){
             Log.d("checkLog", "Non sei loggato")

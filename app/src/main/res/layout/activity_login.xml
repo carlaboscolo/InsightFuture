@@ -73,7 +73,6 @@
         android:padding="8dp"
         />
 
-
     <TextView
         android:id="@+id/registerNow"
         android:text="@string/clicca_per_registrarti"

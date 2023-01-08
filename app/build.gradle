@@ -68,4 +68,7 @@ dependencies {
     //google sign
     implementation 'com.github.TutorialsAndroid:GButton:v1.0.19'
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
+    //facebook sign
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.gbuttons.GoogleSignInButton
 import com.example.insightfuture.MainActivity
+import com.example.insightfuture.Modal.users
 import com.example.insightfuture.R
 import com.example.insightfuture.databinding.ActivityLoginBinding
 import com.facebook.*
@@ -30,6 +31,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 
@@ -42,14 +46,14 @@ class LoginActivity : AppCompatActivity() {
     lateinit var registerNow: TextView
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database : FirebaseDatabase
 
     private lateinit var googleBtn: GoogleSignInButton
     private lateinit var gOptions: GoogleSignInOptions
     private lateinit var gClient: GoogleSignInClient
 
     private lateinit var loginButton: LoginButton
-    lateinit var callbackManager: CallbackManager
-
+    var callbackManager: CallbackManager? = null
 
     public override fun onStart() {
         super.onStart()
@@ -66,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance("https://insightfuture-login-default-rtdb.firebaseio.com/")
         FacebookSdk.sdkInitialize(getApplicationContext())
 
         editTextEmail = binding.email
@@ -97,7 +102,6 @@ class LoginActivity : AppCompatActivity() {
                 }
                 builder.show()
             } else {
-
 
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this) { task ->
@@ -136,19 +140,19 @@ class LoginActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
 
         loginButton = binding.fbBtn
-        loginButton.setReadPermissions("email", "public_profile")
+        loginButton.setReadPermissions("email")
         loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-                    Log.d("fblogin", "facebook:onSuccess:$loginResult")
+                    Toast.makeText(this@LoginActivity, "Facebook Authentication success.", Toast.LENGTH_SHORT).show()
                     handleFacebookAccessToken(loginResult.accessToken)
                 }
 
                 override fun onCancel() {
-                    Log.d("fblogin", "facebook:onCancel")
+                    Toast.makeText(this@LoginActivity, "Facebook Authentication canceled.", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onError(error: FacebookException) {
-                    Log.d("fblogin", "facebook:onError", error)
+                override fun onError(error: FacebookException?) {
+                    Toast.makeText(this@LoginActivity, "Facebook Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             })
 
@@ -199,8 +203,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("email", account.email)
-                intent.putExtra("name", account.displayName)
+               // intent.putExtra("email", account.email)
+               // intent.putExtra("name", account.displayName)
                 startActivity(intent)
                 finish()
             } else {
@@ -210,26 +214,33 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //integrazione con Facebook
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        callbackManager.onActivityResult(requestCode, resultCode, data)
+        callbackManager!!.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d("token", "handleFacebookAccessToken:$token")
 
         val credential = FacebookAuthProvider.getCredential(token.token)
-        auth.signInWithCredential(credential).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(baseContext, "Autentificazione riuscita",
-                        Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                } else {
-                    Log.d("fbLogin", "sono entrato qui fallito")
-                    Log.w(TAG, "signInWithCredential:failure", it.exception)
+        auth!!.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(baseContext, "Autentificazione riuscita",Toast.LENGTH_SHORT).show()
+
+                  /*  val user = Firebase.auth.currentUser
+                    val users1 : users = users()
+                    if (user != null) {
+                        users1.setUserName(user.displayName!!)
+                        database.reference.child("users").child(user.uid).setValue(users1)
+                    } */
+
+                    launchActivity()
+
+                       //val intent = Intent(this, MainActivity::class.java)
+                        // intent.putExtra("name", user.displayName.toString())
+                        //startActivity(intent)
+                       // finish()
+                      } else {
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                 }

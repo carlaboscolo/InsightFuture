@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
+import org.w3c.dom.Text
 import java.io.Serializable
 import java.text.Normalizer
 import kotlin.properties.Delegates
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var childText : TextView
     private lateinit var parentSp : Spinner
     private lateinit var childSp : Spinner
+    private lateinit var infoLogin : TextView
 
     private lateinit var arraylistParent : ArrayList<String>
     private lateinit var arrayAdapter : ArrayAdapter<String>
@@ -110,8 +112,18 @@ class MainActivity : AppCompatActivity() {
         bornPlace = binding.bornPlace
         searchBtn = binding.searchBtn
 
+        //senza login
+        parentText = binding.tvParent
+        childText = binding.tvChild
+        parentSp = binding.spParent
+        childSp = binding.spChild
+        infoLogin = binding.info
+
         //firebase
         auth = FirebaseAuth.getInstance()
+
+        //pulsante login
+        loginPageBtn = binding.loginPageBtn
 
         //toolbar
         val display = supportActionBar
@@ -125,18 +137,14 @@ class MainActivity : AppCompatActivity() {
        if(user == null){
             Log.d("checkLog", "Non sei loggato")
 
-           //senza login
-           parentText = binding.tvParent
-           childText = binding.tvChild
-           parentSp = binding.spParent
-           childSp = binding.spChild
-
            //visibility
            question.visibility = View.GONE
            parentText.visibility = View.VISIBLE
            childText.visibility = View.VISIBLE
            parentSp.visibility = View.VISIBLE
            childSp.visibility = View.VISIBLE
+           infoLogin.visibility = View.VISIBLE
+           loginPageBtn.visibility = View.VISIBLE
 
            //array categorie
            arraylistParent = ArrayList<String>()
@@ -194,6 +202,11 @@ class MainActivity : AppCompatActivity() {
                }
            }
 
+           //pulsante per il login
+           loginPageBtn.setOnClickListener {
+               launchLogin()
+           }
+
            isLogged = false
 
            //fine senza login
@@ -201,16 +214,16 @@ class MainActivity : AppCompatActivity() {
        }else{
            Log.d("checkLog", "Sei loggato")
 
+           //visibility
+           question.visibility = View.VISIBLE
+           parentText.visibility = View.GONE
+           childText.visibility = View.GONE
+           parentSp.visibility = View.GONE
+           childSp.visibility = View.GONE
+           infoLogin.visibility = View.GONE
+           loginPageBtn.visibility = View.GONE
 
            isLogged = true
-        }
-
-
-
-        loginPageBtn = binding.loginPageBtn
-
-        loginPageBtn.setOnClickListener {
-           launchLogin()
         }
 
 
@@ -445,6 +458,13 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.logout -> {
                 FirebaseAuth.getInstance().signOut()
+
+                //fa il refresh della pagina quando si viene sloggati
+                finish()
+                overridePendingTransition(0, 0)
+                startActivity(getIntent())
+                overridePendingTransition(0, 0)
+
                 Log.d("logout", "logout clicked")
                 true
             }

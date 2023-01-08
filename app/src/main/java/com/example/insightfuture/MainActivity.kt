@@ -82,6 +82,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var questionUser : String
     private var isLogged : Boolean = false
 
+
+    private lateinit var parentText : TextView
+    private lateinit var childText : TextView
     private lateinit var parentSp : Spinner
     private lateinit var childSp : Spinner
 
@@ -115,19 +118,27 @@ class MainActivity : AppCompatActivity() {
         display?.title = "Interroga la Sibilla"
         display?.setDisplayHomeAsUpEnabled(true)
 
-        //ricordarsi di mettere visibility se c'è il login
-
+        //firebase
         val user = Firebase.auth.currentUser
+        analytics = Firebase.analytics
 
        if(user == null){
             Log.d("checkLog", "Non sei loggato")
 
-           question.visibility = View.GONE
-
            //senza login
+           parentText = binding.tvParent
+           childText = binding.tvChild
            parentSp = binding.spParent
            childSp = binding.spChild
 
+           //visibility
+           question.visibility = View.GONE
+           parentText.visibility = View.VISIBLE
+           childText.visibility = View.VISIBLE
+           parentSp.visibility = View.VISIBLE
+           childSp.visibility = View.VISIBLE
+
+           //array categorie
            arraylistParent = ArrayList<String>()
            arraylistParent.add("Amore")
            arraylistParent.add("Lavoro")
@@ -189,7 +200,7 @@ class MainActivity : AppCompatActivity() {
 
        }else{
            Log.d("checkLog", "Sei loggato")
-           analytics = Firebase.analytics
+
 
            isLogged = true
         }
@@ -218,8 +229,6 @@ class MainActivity : AppCompatActivity() {
                 //domanda base scritta da utente
                 questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             }
-
-
 
            val nameUser = name.text.toString().toLowerCase()
                 .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()

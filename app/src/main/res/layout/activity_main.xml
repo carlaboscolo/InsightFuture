@@ -26,12 +26,14 @@
         android:layout_height="wrap_content"
         android:text="@string/parent"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/sp_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="5dp" />
 
     <TextView
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/child"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         android:textSize="20sp" />
 
     <Spinner
@@ -47,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:visibility="gone"
         />
 
 
@@ -75,8 +79,7 @@
         android:id="@+id/bornPlace"
         android:layout_width="match_parent"
         android:layout_height="150px"
-        android:layout_marginStart="4dp"
-        android:background="@color/white"
+       android:background="@color/white"
         android:hint="@string/bornPlace"
         android:textColor="@color/black"
         android:textSize="20sp"

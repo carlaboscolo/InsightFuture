@@ -69,11 +69,12 @@
         android:layout_marginEnd="40dp"
         android:padding="8dp"
         android:text="@string/sign_in_with_google"
-        app:isDarkTheme="true" />
+        app:isDarkTheme="true"
+        />
 
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+        android:id="@+id/fbBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -11,14 +11,12 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.insightfuture.login.LoginActivity
 import com.example.insightfuture.model.User
-import com.facebook.FacebookSdk
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.json.JSONArray
-import org.w3c.dom.Text
 import java.io.Serializable
 import java.text.Normalizer
 import kotlin.properties.Delegates
@@ -132,8 +130,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         val user = Firebase.auth.currentUser
         analytics = Firebase.analytics
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
 
        if(user == null){
             Log.d("checkLog", "Non sei loggato")

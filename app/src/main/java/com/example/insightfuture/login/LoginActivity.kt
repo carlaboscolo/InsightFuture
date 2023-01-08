@@ -137,20 +137,18 @@ class LoginActivity : AppCompatActivity() {
 
         loginButton = binding.fbBtn
         loginButton.setReadPermissions("email", "public_profile")
-        loginButton.registerCallback(
-            callbackManager,
-            object : FacebookCallback<LoginResult> {
+        loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-                    Log.d(TAG, "facebook:onSuccess:$loginResult")
+                    Log.d("fblogin", "facebook:onSuccess:$loginResult")
                     handleFacebookAccessToken(loginResult.accessToken)
                 }
 
                 override fun onCancel() {
-                    Log.d(TAG, "facebook:onCancel")
+                    Log.d("fblogin", "facebook:onCancel")
                 }
 
                 override fun onError(error: FacebookException) {
-                    Log.d(TAG, "facebook:onError", error)
+                    Log.d("fblogin", "facebook:onError", error)
                 }
             })
 
@@ -219,14 +217,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
+        Log.d("token", "handleFacebookAccessToken:$token")
 
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential).addOnCompleteListener {
                 if (it.isSuccessful) {
                     Toast.makeText(baseContext, "Autentificazione riuscita",
                         Toast.LENGTH_SHORT).show()
-                        Log.d("fbLogin", "sono entrato qui")
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()

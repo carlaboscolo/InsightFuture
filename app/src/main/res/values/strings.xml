@@ -34,7 +34,7 @@
     <string name="sign_in_with_google">Loggati con Google</string>
     <string name="facebook_app_id">918013009565351</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">56789</string>
+    <string name="facebook_client_token">86d8ad837745b9852128e75f93324302</string>
     <string name="loggati_con_facebook">Loggati con Facebook</string>
 
 </resources>

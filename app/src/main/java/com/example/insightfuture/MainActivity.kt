@@ -79,6 +79,8 @@ class MainActivity : AppCompatActivity() {
 
     //senza login
     private lateinit var questionText : String
+    private lateinit var questionUser : String
+    private var isLogged : Boolean = false
 
     private lateinit var parentSp : Spinner
     private lateinit var childSp : Spinner
@@ -116,24 +118,81 @@ class MainActivity : AppCompatActivity() {
         //ricordarsi di mettere visibility se c'è il login
 
         val user = Firebase.auth.currentUser
-        user?.let {
-            val name = user.displayName
-            val email = user.email
-            val photoUrl = user.photoUrl
-            val emailVerified = user.isEmailVerified
-            val uid = user.uid
 
-        }
-
-        //    user = auth.currentUser!!
        if(user == null){
-           // launchLogin()
             Log.d("checkLog", "Non sei loggato")
-        }else{
+
+           question.visibility = View.GONE
+
+           //senza login
+           parentSp = binding.spParent
+           childSp = binding.spChild
+
+           arraylistParent = ArrayList<String>()
+           arraylistParent.add("Amore")
+           arraylistParent.add("Lavoro")
+           arraylistParent.add("Famiglia")
+
+           arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.select_dialog_item, arraylistParent)
+
+           parentSp.setAdapter(arrayAdapter)
+
+           //child
+           arrayAmore = ArrayList<String>()
+           arrayAmore.add("Sarò fortunato/a in amore quest’anno ?")
+           arrayAmore.add("Come sarà la mia prossima relazione ?")
+
+           arrayLavoro = ArrayList<String>()
+           arrayLavoro.add("Come posso affrontare le opportunità lavorative che mi attendono ?")
+           arrayLavoro.add("Come posso raggiungere il lavoro dei miei sogni ?")
+
+           arrayFamiglia = ArrayList<String>()
+           arrayFamiglia.add("Come posso andare d’accordo con i miei genitori ?")
+           arrayFamiglia.add("Cosa devo fare per avvicinarmi di più a mio figlio ?")
+
+           //process
+           arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
+           childSp.setAdapter(arrayAdapterChild)
+
+           parentSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+               override fun onNothingSelected(parent: AdapterView<*>?) {
+
+               }
+               override fun onItemSelected(parent : AdapterView<*>?, view : View?, position: Int, id : Long){
+                   if(position == 0){
+                       arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
+                       childSp.setAdapter(arrayAdapterChild)
+                   }else if(position == 1){
+                       arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayLavoro)
+                       childSp.setAdapter(arrayAdapterChild)
+                   } else if(position == 2){
+                       arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayFamiglia)
+                       childSp.setAdapter(arrayAdapterChild)
+                   }
+
+               }
+           }
+
+           childSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+               override fun onNothingSelected(parent: AdapterView<*>?) {
+
+               }
+               override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                   questionText = parent?.getItemAtPosition(position).toString()
+                   Log.d("scelta", questionText)
+               }
+           }
+
+           isLogged = false
+
+           //fine senza login
+
+       }else{
            Log.d("checkLog", "Sei loggato")
            analytics = Firebase.analytics
-        }
 
+           isLogged = true
+        }
 
 
 
@@ -144,80 +203,25 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        //senza login
-        parentSp = binding.spParent
-        childSp = binding.spChild
-
-        arraylistParent = ArrayList<String>()
-        arraylistParent.add("Amore")
-        arraylistParent.add("Lavoro")
-        arraylistParent.add("Famiglia")
-
-        arrayAdapter = ArrayAdapter<String>(applicationContext, android.R.layout.select_dialog_item, arraylistParent)
-
-        parentSp.setAdapter(arrayAdapter)
-
-        //child
-        arrayAmore = ArrayList<String>()
-        arrayAmore.add("Sarò fortunato/a in amore quest’anno ?")
-        arrayAmore.add("Come sarà la mia prossima relazione ?")
-
-        arrayLavoro = ArrayList<String>()
-        arrayLavoro.add("Come posso affrontare le opportunità lavorative che mi attendono ?")
-        arrayLavoro.add("Come posso raggiungere il lavoro dei miei sogni ?")
-
-        arrayFamiglia = ArrayList<String>()
-        arrayFamiglia.add("Come posso andare d’accordo con i miei genitori ?")
-        arrayFamiglia.add("Cosa devo fare per avvicinarmi di più a mio figlio ?")
-
-        //process
-        arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
-        childSp.setAdapter(arrayAdapterChild)
-
-        parentSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-            override fun onItemSelected(parent : AdapterView<*>?, view : View?, position: Int, id : Long){
-                if(position == 0){
-                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayAmore)
-                    childSp.setAdapter(arrayAdapterChild)
-                }else if(position == 1){
-                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayLavoro)
-                    childSp.setAdapter(arrayAdapterChild)
-                } else if(position == 2){
-                    arrayAdapterChild = ArrayAdapter(applicationContext,  android.R.layout.select_dialog_item, arrayFamiglia)
-                    childSp.setAdapter(arrayAdapterChild)
-                }
-
-            }
-        }
-
-        childSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-               questionText = parent?.getItemAtPosition(position).toString()
-                Log.d("scelta", questionText)
-            }
-        }
-
-       //fine senza login
-
-
-
-
         // KeyLetters.forEach { (key, value) -> Log.d("value","$key = $value" ) }
 
         searchBtn.setOnClickListener {
-           //domanda senza login
-            val questionUser = questionText.toString().toLowerCase()
-                .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
 
-            //domanda base scritta da utente
-            // val questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
-            val nameUser = name.text.toString().toLowerCase()
+            if(!isLogged){
+                Log.d("checkLog", isLogged.toString())
+
+                //domanda senza login
+                questionUser = questionText.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            }else{
+                Log.d("checkLog", isLogged.toString())
+
+                //domanda base scritta da utente
+                questionUser = question.text.toString().toLowerCase().replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
+            }
+
+
+
+           val nameUser = name.text.toString().toLowerCase()
                 .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()
             val surnameUser = surname.text.toString().toLowerCase()
                 .replace("[-\\[\\][z0-9]^/.,'*:!><~@#\$%+=?|\"\\\\()]+".toRegex(), "").Normalize()

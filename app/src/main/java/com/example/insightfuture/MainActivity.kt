@@ -362,6 +362,7 @@ class MainActivity : AppCompatActivity() {
     private fun launchLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 
